@@ -1,0 +1,548 @@
+<form>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>CUST_NUM:</text> 
+    <name>CUST_NUM.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CUST_NUM</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>CUST_NUM</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>FIRST_NAME:</text> 
+    <name>FIRST_NAME.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>FIRST_NAME</name> 
+    <length>20</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>FIRST_NAME</bindField>
+    <cellconstraints>w 100:200:300, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>LAST_NAME:</text> 
+    <name>LAST_NAME.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>LAST_NAME</name> 
+    <length>25</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>LAST_NAME</bindField>
+    <cellconstraints>w 125:250:375, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>COMPANY:</text> 
+    <name>COMPANY.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>COMPANY</name> 
+    <length>25</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>COMPANY</bindField>
+    <cellconstraints>w 125:250:375, wrap</cellconstraints> 
+</element>
+
+</panel>
+</group>
+
+<group>
+<maxcols>4</maxcols>
+<panel>
+
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>ADDRTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Address</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>BILL_ADDR1:</text> 
+    <name>BILL_ADDR1.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>BILL_ADDR1</name> 
+    <length>25</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>BILL_ADDR1</bindField>
+    <cellconstraints>w 125:250:375, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>BILL_ADDR2:</text> 
+    <name>BILL_ADDR2.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>BILL_ADDR2</name> 
+    <length>25</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>BILL_ADDR2</bindField>
+    <cellconstraints>w 125:250:375, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>CITY:</text> 
+    <name>CITY.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CITY</name> 
+    <length>20</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>CITY</bindField>
+    <cellconstraints>w 100:200:300, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>STATE:</text> 
+    <name>STATE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/ComboboxWidget</type> 
+    <name>STATE</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>STATE</bindField>
+    <fillClass>(STATE)</fillClass>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>STATE_NAME</name> 
+    <length>10</length>
+    <bindClass>(STATE)</bindClass>
+    <bindField>NAME</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>POST_CODE:</text> 
+    <name>POST_CODE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>POST_CODE</name> 
+    <length>12</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>POST_CODE</bindField>
+    <cellconstraints>w 60:120:180,wrap </cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>COUNTRY:</text> 
+    <name>COUNTRY.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>COUNTRY</name> 
+    <length>20</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>COUNTRY</bindField>
+    <fillClass>(COUNTRY)</fillClass>    
+    <cellconstraints>w 100:200:300</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>COUNTRY_NAME</name> 
+    <length>10</length>
+    <bindClass>(COUNTRY)</bindClass>
+    <bindField>NAME</bindField>
+    <cellconstraints>w 50:100:150,wrap</cellconstraints> 
+</element>
+
+
+</panel>
+</group>
+
+<group>
+<panel>
+
+<maxcols>4</maxcols>
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>COMMTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Communication</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>PHONE:</text> 
+    <name>PHONE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>PHONE</name> 
+    <length>15</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>PHONE</bindField>
+    <cellconstraints>w 75:150:225, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>FAX:</text> 
+    <name>FAX.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>FAX</name> 
+    <length>15</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>FAX</bindField>
+    <cellconstraints>w 75:150:225, wrap</cellconstraints> 
+</element>
+</panel>
+
+<panel>
+
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>SALESTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Misc</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SALESPERSON:</text> 
+    <name>SALESPERSON.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>SALESPERSON</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SALESPERSON</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SHIP_ZONE:</text> 
+    <name>SHIP_ZONE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>SHIP_ZONE</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SHIP_ZONE</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SHIP_METHOD:</text> 
+    <name>SHIP_METHOD.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>SHIP_METHOD</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SHIP_METHOD</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+</panel>
+
+<panel>
+
+
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>BALTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Account Balances</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>CURRENT_BAL:</text> 
+    <name>CURRENT_BAL.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>CURRENT_BAL</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>CURRENT_BAL</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>OVER_30:</text> 
+    <name>OVER_30.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>OVER_30</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>OVER_30</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>OVER_60:</text> 
+    <name>OVER_60.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>OVER_60</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>OVER_60</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>OVER_90:</text> 
+    <name>OVER_90.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>OVER_90</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>OVER_90</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>OVER_120:</text> 
+    <name>OVER_120.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>OVER_120</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>OVER_120</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+</panel>
+
+<panel>
+
+
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>SALESTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Sales</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SALES_MTD:</text> 
+    <name>SALES_MTD.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>SALES_MTD</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SALES_MTD</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SALES_YTD:</text> 
+    <name>SALES_YTD.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>SALES_YTD</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SALES_YTD</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SALES_LY:</text> 
+    <name>SALES_LY.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>SALES_LY</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>SALES_LY</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+</panel>
+
+<panel>
+
+<maxcols>4</maxcols>
+<layoutconstraints>insets dialog,fillx</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <name>PURCHTITLE</name> 
+    <length>50</length>
+    <cssClass>GroupTitle</cssClass>
+    <text>Purchases</text>
+    <cellconstraints>spanx,wrap,grow, h 30, w 400!</cellconstraints> 
+</element>
+
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>LAST_PURCH_DATE:</text> 
+    <name>LAST_PURCH_DATE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputDWidget</type> 
+    <name>LAST_PURCH_DATE</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>LAST_PURCH_DATE</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>LAST_PAY_DATE:</text> 
+    <name>LAST_PAY_DATE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputDWidget</type> 
+    <name>LAST_PAY_DATE</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>LAST_PAY_DATE</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>CREDIT_CODE:</text> 
+    <name>CREDIT_CODE.label</name> 
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CREDIT_CODE</name> 
+    <length>10</length>
+    <bindClass>CustomerBusinessComponent</bindClass>
+    <bindField>CREDIT_CODE</bindField>
+    <cellconstraints>w 50:100:150, wrap</cellconstraints> 
+</element>
+</panel>
+</group>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx, wrap 2</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>Sample Checkbox:</text> 
+    <name>SAMPLE_CHECKBOX.label</name> 
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/CheckboxWidget</type> 
+    <name>SAMPLE_CHECKBOX</name> 
+    <length>11</length>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+
+</panel>
+</group>
+
+</form>

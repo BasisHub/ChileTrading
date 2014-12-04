@@ -1,0 +1,158 @@
+<form>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx, wrap 2</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>SALESPERSON:</text> 
+    <name>SALESPERSON.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>SALESPERSON</name> 
+    <length>10</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>SALESPERSON</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>NAME:</text> 
+    <name>NAME.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>NAME</name> 
+    <length>25</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>NAME</bindField>
+    <cellconstraints>w 125:250:375</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>ADDRESS:</text> 
+    <name>ADDRESS.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>ADDRESS</name> 
+    <length>25</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>ADDRESS</bindField>
+    <cellconstraints>w 125:250:375</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>ADDRESS2:</text> 
+    <name>ADDRESS2.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>ADDRESS2</name> 
+    <length>25</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>ADDRESS2</bindField>
+    <cellconstraints>w 125:250:375</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>CITY:</text> 
+    <name>CITY.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CITY</name> 
+    <length>20</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>CITY</bindField>
+    <cellconstraints>w 100:200:300</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>STATE:</text> 
+    <name>STATE.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>STATE</name> 
+    <length>10</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>STATE</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>ZIP:</text> 
+    <name>ZIP.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>ZIP</name> 
+    <length>10</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>ZIP</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>PHONE:</text> 
+    <name>PHONE.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>PHONE</name> 
+    <length>15</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>PHONE</bindField>
+    <cellconstraints>w 75:150:225</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>COMM_RATE:</text> 
+    <name>COMM_RATE.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputNWidget</type> 
+    <name>COMM_RATE</name> 
+    <length>10</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>COMM_RATE</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>COMM_TYPE:</text> 
+    <name>COMM_TYPE.label</name> 
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>COMM_TYPE</name> 
+    <length>10</length>
+    <bindClass>SalesrepBusinessComponent</bindClass>
+    <bindField>COMM_TYPE</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+</panel>
+</group>
+</form>

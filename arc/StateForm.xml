@@ -1,0 +1,38 @@
+<form>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx, wrap 2</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>State ID:</text> 
+    <name>CODE.label</name> 
+    <bindClass>StateBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CODE</name> 
+    <length>10</length>
+    <bindClass>StateBusinessComponent</bindClass>
+    <bindField>CODE</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>State Name:</text> 
+    <name>NAME.label</name> 
+    <bindClass>StateBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>NAME</name> 
+    <length>15</length>
+    <bindClass>StateBusinessComponent</bindClass>
+    <bindField>NAME</bindField>
+    <cellconstraints>w 75:150:225</cellconstraints> 
+</element>
+</panel>
+</group>
+</form>

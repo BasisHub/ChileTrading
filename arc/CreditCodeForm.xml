@@ -1,0 +1,38 @@
+<form>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx, wrap 2</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>Code:</text> 
+    <name>CODE.label</name> 
+    <bindClass>CreditCodeBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>CODE</name> 
+    <length>10</length>
+    <bindClass>CreditCodeBusinessComponent</bindClass>
+    <bindField>CODE</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>DESC:</text> 
+    <name>DESC.label</name> 
+    <bindClass>CreditCodeBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>DESC</name> 
+    <length>25</length>
+    <bindClass>CreditCodeBusinessComponent</bindClass>
+    <bindField>DESC</bindField>
+    <cellconstraints>w 125:250:375</cellconstraints> 
+</element>
+</panel>
+</group>
+</form>

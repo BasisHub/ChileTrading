@@ -1,0 +1,14 @@
+use ::ui/CustomerFlexiForm.bbj::CustomerFlexiForm
+use ::bl/CustomerBusinessComponent.bbj::CustomerBusinessComponent
+
+declare CustomerFlexiForm        EditForm!
+declare CustomerBusinessComponent bc!
+
+bc! = new CustomerBusinessComponent()
+
+EditForm! = new CustomerFlexiForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

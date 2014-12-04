@@ -1,0 +1,74 @@
+use com.basiscomponents.db.DataRow
+
+rem /**
+rem * CreditCodeEntityT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public CreditCodeEntityT extends DataRow
+
+    
+    field protected String Code!
+    
+    field protected String Desc!
+    
+
+    
+    method protected String getCode()
+        methodret #Code!
+    methodend
+    
+    method protected String getDesc()
+        methodret #Desc!
+    methodend
+    
+
+    
+    method protected void setCode(String Code!)
+        #Code! = Code!
+    methodend
+    
+    method protected void setDesc(String Desc!)
+        #Desc! = Desc!
+    methodend
+    
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

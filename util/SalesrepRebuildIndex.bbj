@@ -1,0 +1,62 @@
+REM OBSOLETE!
+REM THIS SHOULD BE REDONE USING THE NEW BBJ TEXTSEARCH IMPLEMENTATION OF BBJ
+
+
+use com.basis.lucene.BBjSearchGizmo
+use com.basis.lucene.BBjSearchGizmoDoc
+use ::bl/SalesrepBusinessComponent.bbj::SalesrepBusinessComponent
+
+chdir ".."
+dir$=::components/util/Util.bbj::Util.getLuceneBaseDir("Salesrep")
+
+bc! = new SalesrepBusinessComponent()
+s=bc!.size()
+bc!.prepareResultSet(0,1)
+
+searchengine! = new BBjSearchGizmo(dir$)
+rs! = bc!.getResultSet()
+prim! = bc!.getPrimaryKeySegments()
+step_ = 10
+
+if prim!.size() then
+
+
+    for x=0 to s step step_
+    low = x
+    high = min(x+step_-1,s-1)
+    bc!.prepareResultSet(low,high)
+    rs! = bc!.getResultSet()
+    
+        rem TODO page for large files!
+        for i=low to high
+            rec! = rs!.getItem(i)
+            pk$=""
+            for pk=0 to prim!.size()-1
+                if pk then
+                     pk$=pk$+"++++"
+                fi
+                pk$=pk$+rec!.getFieldAsString(prim!.getItem(pk))
+            next
+    
+            d! = new BBjSearchGizmoDoc(pk$)
+    		
+            d!.addField("SALESPERSON",rec!.getFieldAsString("SALESPERSON"),1.0)		
+            d!.addField("NAME",rec!.getFieldAsString("NAME"),1.0)		
+            d!.addField("ADDRESS",rec!.getFieldAsString("ADDRESS"),1.0)		
+            d!.addField("ADDRESS2",rec!.getFieldAsString("ADDRESS2"),1.0)		
+            d!.addField("CITY",rec!.getFieldAsString("CITY"),1.0)		
+            d!.addField("STATE",rec!.getFieldAsString("STATE"),1.0)		
+            d!.addField("ZIP",rec!.getFieldAsString("ZIP"),1.0)		
+            d!.addField("PHONE",rec!.getFieldAsString("PHONE"),1.0)		
+            d!.addField("COMM_RATE",rec!.getFieldAsString("COMM_RATE"),1.0)		
+            d!.addField("COMM_TYPE",rec!.getFieldAsString("COMM_TYPE"),1.0)
+            searchengine!.addDocument(d!)
+            print "Adding ",pk$
+            count=count+1
+        next i 
+    next x
+else
+    a=msgbox("no primary key defined!",0,"Can't create index!")
+fi
+
+release

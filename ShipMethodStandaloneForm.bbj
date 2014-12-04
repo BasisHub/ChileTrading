@@ -1,0 +1,14 @@
+use ::ui/ShipMethodForm.bbj::ShipMethodForm
+use ::bl/ShipMethodBusinessComponent.bbj::ShipMethodBusinessComponent
+
+declare ShipMethodForm        EditForm!
+declare ShipMethodBusinessComponent bc!
+
+bc! = new ShipMethodBusinessComponent()
+
+EditForm! = new ShipMethodForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

@@ -1,0 +1,14 @@
+use ::ui/CreditCodeFlexiForm.bbj::CreditCodeFlexiForm
+use ::bl/CreditCodeBusinessComponent.bbj::CreditCodeBusinessComponent
+
+declare CreditCodeFlexiForm        EditForm!
+declare CreditCodeBusinessComponent bc!
+
+bc! = new CreditCodeBusinessComponent()
+
+EditForm! = new CreditCodeFlexiForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

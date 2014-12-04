@@ -1,0 +1,38 @@
+<form>
+<group>
+<panel>
+<layoutconstraints>insets dialog,fillx, wrap 2</layoutconstraints>
+<columnconstraints>[align label,grow,fill, shrink 20]unrel[grow,fill, shrink 80]</columnconstraints>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>ID:</text> 
+    <name>ID.label</name> 
+    <bindClass>CountryBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>ID</name> 
+    <length>10</length>
+    <bindClass>CountryBusinessComponent</bindClass>
+    <bindField>ID</bindField>
+    <cellconstraints>w 50:100:150</cellconstraints> 
+</element>
+<element>
+    <type>components/ui/bound/controls/LabelWidget</type> 
+    <text>Name:</text> 
+    <name>NAME.label</name> 
+    <bindClass>CountryBusinessComponent</bindClass>
+    <cellconstraints>w 100:200:200</cellconstraints> 
+</element>      
+<element>
+    <type>components/ui/bound/controls/InputEWidget</type> 
+    <name>NAME</name> 
+    <length>25</length>
+    <bindClass>CountryBusinessComponent</bindClass>
+    <bindField>NAME</bindField>
+    <cellconstraints>w 125:250:375</cellconstraints> 
+</element>
+</panel>
+</group>
+</form>

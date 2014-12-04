@@ -1,0 +1,355 @@
+rem /** 
+rem * Message
+rem * 
+rem * <class description>
+rem * 
+rem * @author <author>
+rem * @version <version>
+rem */
+
+use ::DialogWizard/BBDialog.bbj::BBDialog
+use ::DialogWizard/DialogUtils.bbj::DialogUtils
+use ::DialogWizard/DialogWizardRun.bbj::DialogWizardRun
+use ::translations/bbtranslator.bbj::BBTranslator
+use ::bbwindowutils.bbj::BBWindowUtils
+use java.util.TreeMap
+use ::Translator.bbj::Translator
+use ::email.bbj:: Email
+use java.util.Date
+
+class public Message extends BBDialog
+
+    rem static member (fields) are only created once for the class
+    field private static BBjAPI        API! = BBjAPI()
+    field private static BBjNumber     TRUE = #API!.TRUE
+    field private static BBjNumber     FALSE = #API!.FALSE
+    field private static BBjSysGui     SysGui! = #API!.openSysGui("X0")
+    field private static BBjThinClient ThinClient! = #API!.getThinClient()
+    field private static BBjString     ClientLocale$ = #ThinClient!.getClientLocale()
+    field private static BBjString     PgmDirectory$ = pgm(-2)(1,max(pos("\"=pgm(-2),-1),pos("/"=pgm(-2),-1)))
+    field private static BBTranslator  Translator! = BBTranslator.getInstance("Message",#ClientLocale$,"en",#PgmDirectory$)
+    field private static BBjNamespace  GroupNS! = #API!.getGroupNamespace()
+
+rem /** DLGWIZ_RES Message.arc 101 **/
+rem /** DLGWIZ_FLD_BEGIN **/
+    field protected BBjString MESSAGE$
+    field protected BBjNumber SUBJECTLIST
+    field protected BBjNumber USERMAIL_LABEL
+rem /** DLGWIZ_FLD_END **/
+
+rem /** DLGWIZ_FLC_BEGIN **/
+    field protected BBjTopLevelWindow C_Form!
+    field protected BBjStaticText C_LBSUBJECT!
+    field protected BBjStaticText C_LBLMESSAGE!
+    field protected BBjCEdit C_MESSAGE!
+    field protected BBjButton C_BTNSEND!
+    field protected BBjButton C_BTNCANCEL!
+    field protected BBjListButton C_SUBJECTLIST!
+    field protected BBjStaticText C_LBFROM!
+    field protected BBjStaticText C_LBUSERMAIL!
+rem /** DLGWIZ_FLC_END **/
+
+    field public BBjTopLevelWindow Wnd!
+
+    rem /**
+    rem * Constructor Message
+    rem */
+    method public Message()
+        #super!("menu/Message.arc",101)
+
+        rem check if sysgui object still valid. if not recreate
+        #SysGui!.getContext(err=*next); sg_ok=1
+        if !sg_ok then
+            #SysGui!=#API!.openSysGui("X0")
+        fi
+
+        if stbl("+USER_LOCALE",err=*endif)<>"" then
+            #ClientLocale$ = stbl("+USER_LOCALE")
+            #Translator! = BBTranslator.getInstance("Message",#ClientLocale$,"en",#PgmDirectory$)
+        endif
+        #Wnd!=#super!.getWndTop()
+        DialogUtils.buildDialogProperties(#Translator!,#super!.getCtrlVect())
+        if #Wnd!<>null() then
+            #initToolBar()
+            #setCallbacks()
+        endif
+    methodend
+
+    rem /**
+    rem * Method initToolBar:
+    rem * Setup toolbar
+    rem */
+    method private void initToolBar()
+rem /** DLGWIZ_BAR_BEGIN **/
+rem /** DLGWIZ_BAR_END **/
+    methodend
+
+    rem /**
+    rem * Method setCallbacks:
+    rem * Set control callbacks
+    rem */
+    method private void setCallbacks()
+rem /** DLGWIZ_CBS_BEGIN **/
+        #super!.getControlByName("BTNCANCEL").setCallback(#API!.ON_BUTTON_PUSH,#this!,"BTNCANCEL__ON_BUTTON_PUSH")
+        #super!.getControlByName("BTNSEND").setCallback(#API!.ON_BUTTON_PUSH,#this!,"BTNSEND__ON_BUTTON_PUSH")
+        #super!.getControlByName("Form").setCallback(#API!.ON_CLOSE,#this!,"Form__ON_CLOSE")
+rem /** DLGWIZ_CBS_END **/
+    methodend
+
+    rem /**
+    rem * Method doDataExchange:
+    rem * Set controls with program variables
+    rem * @param BBjNumber pInitFlag: Controls are initialized, if true
+    rem */
+    method private void doDataExchange(BBjNumber pInitFlag)
+rem /** DLGWIZ_DDX_BEGIN **/
+        #MESSAGE$=#doDDX("MESSAGE",#MESSAGE$,pInitFlag,1)
+        #SUBJECTLIST=#doDDX("SUBJECTLIST",#SUBJECTLIST,pInitFlag,1)
+        #USERMAIL_LABEL=#doDDX("LBUSERMAIL",#USERMAIL_LABEL,pInitFlag,1)
+rem /** DLGWIZ_DDX_END **/
+    methodend
+    
+     method public void fillSubjectList()
+        Declare TreeMap map!
+REM         userObject! = BBjAPI().getObjectTable().get("mupo")
+REM         map! = Translator.getAttributeList("SUBJECT_LIST", userObject!.getUser().getIsoLocale())
+REM         it! = map!.keySet().iterator()
+REM         while(it!.hasNext())
+REM             tmp! = it!.next()
+            #C_SUBJECTLIST!.addItem("Damage")
+            #C_SUBJECTLIST!.addItem("Inquiry")
+            #C_SUBJECTLIST!.addItem("Police")
+REM         wend 
+    methodend
+
+    rem /**
+    rem * Method doModal:
+    rem * Initialize and display dialog (contains PROCESS_EVENTS)
+    rem * @see doDataExchange(BBjNumber pInitFlag)
+    rem * @see onInitDialog()
+    rem * @see onExitDialog()
+    rem * @return BBjNumber Answer: 0=Passed required fields check, 1=Dialog canceled/closed
+    rem */
+    method public BBjNumber doModal()
+
+        #API!.setCustomEventCallback("ReturnAnswer","do_return")
+        #API!.setCustomEventCallback("CancelAnswer","do_cancel")
+
+        #doDataExchange(#TRUE)
+        #super!.setAllValidated(#TRUE)
+
+        #onInitDialog()
+        #Wnd!.setVisible(#TRUE)
+
+        do_process_events:
+        process_events,err=*same
+
+        do_return:
+            #doDataExchange(#FALSE)
+
+            if #super!.getAllValidated()=0 then
+                #super!.setAllValidated(#TRUE)
+                goto do_process_events
+            endif
+
+        do_cancel:
+            #onExitDialog()
+            #Wnd!.destroy()
+
+        methodret #super!.getAnswer()
+    methodend
+
+    rem /**
+    rem * Method onInitDialog:
+    rem * Your custom initialization
+    rem */
+    method public void onInitDialog()
+rem /** DLGWIZ_INI_BEGIN **/
+        #C_Form! = cast(BBjTopLevelWindow,#super!.getControlByName("Form"))
+        #C_LBSUBJECT! = cast(BBjStaticText,#super!.getControlByName("LBSUBJECT"))
+        #C_LBLMESSAGE! = cast(BBjStaticText,#super!.getControlByName("LBLMESSAGE"))
+        #C_MESSAGE! = cast(BBjCEdit,#super!.getControlByName("MESSAGE"))
+        #C_BTNSEND! = cast(BBjButton,#super!.getControlByName("BTNSEND"))
+        #C_BTNCANCEL! = cast(BBjButton,#super!.getControlByName("BTNCANCEL"))
+        #C_SUBJECTLIST! = cast(BBjListButton,#super!.getControlByName("SUBJECTLIST"))
+        #C_LBFROM! = cast(BBjStaticText,#super!.getControlByName("LBFROM"))
+        #C_LBUSERMAIL! = cast(BBjStaticText,#super!.getControlByName("LBUSERMAIL"))
+        #setUserMail()
+        #fillSubjectList()
+rem /** DLGWIZ_INI_END **/
+    rem uncomment the next line to center window
+    rem BBWindowUtils.centerWindow(#Wnd!)
+    methodend
+
+    method public void setUserMail()
+        rem get the user object 
+REM         userObject! = BBjAPI().getObjectTable().get("mupo")
+        rem set the Users mail address to the email label
+        rem #C_LBUSERMAIL!!.setText(userObject!.getUser().getEmail())
+REM         #C_LBUSERMAIL!.setText(userObject!.getUser().getUserId())
+    methodend
+    
+
+    rem /**
+    rem * Method onExitDialog:
+    rem * Your custom exit code
+    rem */
+    method public void onExitDialog()
+        #Translator!.getTranslationBundle().save()
+    methodend
+
+    rem /**
+    rem * Method postCancelAnswer:
+    rem * Set dialog answer to "canceled"
+    rem */
+    method public void postCancelAnswer()
+        #super!.setAnswer(0)
+        #API!.postCustomEvent("CancelAnswer",null())
+    methodend
+
+    rem /**
+    rem * Method postReturnAnswer:
+    rem * Set dialog answer to "normal return"
+    rem */
+    method public void postReturnAnswer()
+        #super!.setAnswer(1)
+        #API!.postCustomEvent("ReturnAnswer",null())
+    methodend
+
+    rem /**
+    rem * Method BTNSEND__ON_BUTTON_PUSH:
+    rem * Event handler for the ON_BUTTON_PUSH event for BTNSEND
+    rem * @param BBjButtonPushEvent Button Push
+    rem */
+    method public void BTNSEND__ON_BUTTON_PUSH(BBjButtonPushEvent pEvent!)
+        subject! = #C_SUBJECTLIST!.getSelectedItem()        
+        rem Check if the user has chosen a subject
+        if(subject!.isEmpty())
+            rem if not then inform him
+            a! = msgBox("No subject has been chosen", 1, "Information" )    
+            methodret
+        fi
+        
+        rem get the selected Item from the Subject list
+        subjectListName$ = "SUBJECT_LIST"
+        
+        rem get the Database name from the config.bbx
+        databaseName$ = stbl("CONCORDIA_DB", err=*next)
+        
+        rem get the required informations from the config.bbx to be able to send a mail 
+        mailHost$ = stbl("MAILHOST", err=*next)
+        mailPort = num(stbl("MAILPORT", err=*next))
+        
+        rem TODO remove if not required anymore
+        rem get the value to know if we are in debug mode or not
+        debug = num(stbl("DEBUG", err=*next))
+        
+        rem get the next possible open channel to acces the Database      
+        ch = sqlunt
+        
+        rem open the database
+        sqlopen(ch) databaseName$
+        
+        rem prepare the sql command
+        sqlprep(ch)"Select * from DEST_MSG_FLEET where GROUP_ID = ? AND SUBJECT = ?"
+        
+        rem get The informations of the user
+REM         userObject! = BBjAPI().getObjectTable().get("mupo")
+        rem get the attribute list map with all possible subjects shown in the subject list
+REM         map! = Translator.getAttributeList(subjectListName$, userObject!.getUser().getIsoLocale())
+        
+        rem get the key of the selected value of the Subject list
+        it! = map!.keySet().iterator()
+        while it!.hasNext()
+            currentKey! = it!.next().toString()
+            if map!.get(currentKey!) = subject! then
+                break
+            fi
+        wend
+        
+        if(!debug) then 
+            rem complete the prepared sql statement with the correct values
+            rem todo complete 
+REM             sqlexec(ch)userObject!.getUser().getExtPartnerRef(),subjectListName$ + "_" +  currentKey!.toString()
+        else
+            rem complete the prepared sql statement with the correct values
+            sqlexec(ch)666,subjectListName$ + "_" + currentKey!.toString()
+        fi
+        
+        rem get the mail address for the current user and for the selected subject
+        dim tmpStr$:sqltmpl(ch)
+        while 1
+            tmpStr$ = sqlfetch(ch,end=*break)
+            mailAddr! = tmpStr.MAIL$
+            mailAddr! = mailAddr!.trim()
+            break
+        wend 
+        sqlclose(ch)
+
+        Declare Email mail!
+        mail! = new Email(mailHost$, mailport)      
+        mail!.setSubject(map!.get(currentKey!.toString()))
+        
+        mail!.setSentDate(new Date())
+        rem get users mail address
+        if(!debug) then
+REM             mail!.setFrom(userObject!.getUser().getEmail())
+        else
+            rem remove if not required anymore
+            mail!.setFrom("Mister_X")
+        fi
+        mail!.setTo(mailAddr!)
+        mail!.addText(#C_MESSAGE!.getText())
+        if (debug) then
+            mail!.send()
+        fi
+        rem TODO get Translation   
+        a! = msgBox("Your email has been sent successfully", 1, "Send Confirmation" )    
+        #postCancelAnswer()  
+        methodret
+       
+    methodend
+
+    rem /**
+    rem * Method Form__ON_CLOSE:
+    rem * Event handler for the ON_CLOSE event for Form
+    rem * @param BBjCloseEvent Close
+    rem */
+    method public void Form__ON_CLOSE(BBjCloseEvent pEvent!)
+        #postCancelAnswer()
+    methodend
+
+    rem /**
+    rem * Method BTNCANCEL__ON_BUTTON_PUSH:
+    rem * Event handler for the ON_BUTTON_PUSH event for BTNCANCEL
+    rem * @param BBjButtonPushEvent Button Push
+    rem */
+    method public void BTNCANCEL__ON_BUTTON_PUSH(BBjButtonPushEvent pEvent!)
+        #postCancelAnswer()
+    methodend
+
+classend
+
+
+rem Test run
+if tcb(13)=0 and argc = 1 and !(BBjAPI().getRuntime().isDebugging()) and info(3,6)<>"5" then
+    new DialogWizardRun(pgm(-1))
+    release
+endif
+
+declare Message myDialog!
+myDialog! = new Message()
+
+rem /** DLGWIZ_SET_BEGIN **/
+rem /** DLGWIZ_SET_END **/
+
+if myDialog!.doModal() and info(3,6)<>"5" then
+    print 'show',
+    print "Passed required fields check"
+rem /** DLGWIZ_GET_BEGIN **/
+    print "USERMAIL_LABEL=",myDialog!.getUSERMAIL_LABEL()
+rem /** DLGWIZ_GET_END **/
+    input "Press ENTER to release",dummy$
+endif
+release
+

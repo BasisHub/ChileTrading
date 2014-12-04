@@ -1,0 +1,78 @@
+REM OBSOLETE!
+REM THIS SHOULD BE REDONE USING THE NEW BBJ TEXTSEARCH IMPLEMENTATION OF BBJ
+
+
+use com.basis.lucene.BBjSearchGizmo
+use com.basis.lucene.BBjSearchGizmoDoc
+use ::bl/CustomerBusinessComponent.bbj::CustomerBusinessComponent
+
+chdir ".."
+dir$=::components/util/Util.bbj::Util.getLuceneBaseDir("Customer")
+
+bc! = new CustomerBusinessComponent()
+s=bc!.size()
+bc!.prepareResultSet(0,1)
+
+searchengine! = new BBjSearchGizmo(dir$)
+rs! = bc!.getResultSet()
+prim! = bc!.getPrimaryKeySegments()
+step_ = 10
+
+if prim!.size() then
+
+
+    for x=0 to s step step_
+    low = x
+    high = min(x+step_-1,s-1)
+    bc!.prepareResultSet(low,high)
+    rs! = bc!.getResultSet()
+    
+        rem TODO page for large files!
+        for i=low to high
+            rec! = rs!.getItem(i)
+            pk$=""
+            for pk=0 to prim!.size()-1
+                if pk then
+                     pk$=pk$+"++++"
+                fi
+                pk$=pk$+rec!.getFieldAsString(prim!.getItem(pk))
+            next
+    
+            d! = new BBjSearchGizmoDoc(pk$)
+    		
+            d!.addField("CUST_NUM",rec!.getFieldAsString("CUST_NUM"),1.0)		
+            d!.addField("FIRST_NAME",rec!.getFieldAsString("FIRST_NAME"),1.0)		
+            d!.addField("LAST_NAME",rec!.getFieldAsString("LAST_NAME"),1.0)		
+            d!.addField("COMPANY",rec!.getFieldAsString("COMPANY"),1.0)		
+            d!.addField("BILL_ADDR1",rec!.getFieldAsString("BILL_ADDR1"),1.0)		
+            d!.addField("BILL_ADDR2",rec!.getFieldAsString("BILL_ADDR2"),1.0)		
+            d!.addField("CITY",rec!.getFieldAsString("CITY"),1.0)		
+            d!.addField("STATE",rec!.getFieldAsString("STATE"),1.0)		
+            d!.addField("COUNTRY",rec!.getFieldAsString("COUNTRY"),1.0)		
+            d!.addField("POST_CODE",rec!.getFieldAsString("POST_CODE"),1.0)		
+            d!.addField("PHONE",rec!.getFieldAsString("PHONE"),1.0)		
+            d!.addField("FAX",rec!.getFieldAsString("FAX"),1.0)		
+            d!.addField("SALESPERSON",rec!.getFieldAsString("SALESPERSON"),1.0)		
+            d!.addField("SHIP_ZONE",rec!.getFieldAsString("SHIP_ZONE"),1.0)		
+            d!.addField("SHIP_METHOD",rec!.getFieldAsString("SHIP_METHOD"),1.0)		
+            d!.addField("CURRENT_BAL",rec!.getFieldAsString("CURRENT_BAL"),1.0)		
+            d!.addField("OVER_30",rec!.getFieldAsString("OVER_30"),1.0)		
+            d!.addField("OVER_60",rec!.getFieldAsString("OVER_60"),1.0)		
+            d!.addField("OVER_90",rec!.getFieldAsString("OVER_90"),1.0)		
+            d!.addField("OVER_120",rec!.getFieldAsString("OVER_120"),1.0)		
+            d!.addField("SALES_MTD",rec!.getFieldAsString("SALES_MTD"),1.0)		
+            d!.addField("SALES_YTD",rec!.getFieldAsString("SALES_YTD"),1.0)		
+            d!.addField("SALES_LY",rec!.getFieldAsString("SALES_LY"),1.0)		
+            d!.addField("LAST_PURCH_DATE",rec!.getFieldAsString("LAST_PURCH_DATE"),1.0)		
+            d!.addField("LAST_PAY_DATE",rec!.getFieldAsString("LAST_PAY_DATE"),1.0)		
+            d!.addField("CREDIT_CODE",rec!.getFieldAsString("CREDIT_CODE"),1.0)
+            searchengine!.addDocument(d!)
+            print "Adding ",pk$
+            count=count+1
+        next i 
+    next x
+else
+    a=msgbox("no primary key defined!",0,"Can't create index!")
+fi
+
+release

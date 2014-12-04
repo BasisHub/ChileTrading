@@ -1,0 +1,14 @@
+use ::ui/StateFlexiForm.bbj::StateFlexiForm
+use ::bl/StateBusinessComponent.bbj::StateBusinessComponent
+
+declare StateFlexiForm        EditForm!
+declare StateBusinessComponent bc!
+
+bc! = new StateBusinessComponent()
+
+EditForm! = new StateFlexiForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

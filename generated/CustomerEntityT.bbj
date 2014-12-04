@@ -1,0 +1,314 @@
+use com.basiscomponents.db.DataRow
+
+rem /**
+rem * CustomerEntityT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public CustomerEntityT extends DataRow
+
+    
+    field protected String CustNum!
+    
+    field protected String FirstName!
+    
+    field protected String LastName!
+    
+    field protected String Company!
+    
+    field protected String BillAddr1!
+    
+    field protected String BillAddr2!
+    
+    field protected String City!
+    
+    field protected String State!
+    
+    field protected String Country!
+    
+    field protected String PostCode!
+    
+    field protected String Phone!
+    
+    field protected String Fax!
+    
+    field protected String Salesperson!
+    
+    field protected String ShipZone!
+    
+    field protected String ShipMethod!
+    
+    field protected java.math.BigDecimal CurrentBal!
+    
+    field protected java.math.BigDecimal Over30!
+    
+    field protected java.math.BigDecimal Over60!
+    
+    field protected java.math.BigDecimal Over90!
+    
+    field protected java.math.BigDecimal Over120!
+    
+    field protected java.math.BigDecimal SalesMtd!
+    
+    field protected java.math.BigDecimal SalesYtd!
+    
+    field protected java.math.BigDecimal SalesLy!
+    
+    field protected java.sql.Date LastPurchDate!
+    
+    field protected java.sql.Date LastPayDate!
+    
+    field protected String CreditCode!
+    
+
+    
+    method protected String getCustNum()
+        methodret #CustNum!
+    methodend
+    
+    method protected String getFirstName()
+        methodret #FirstName!
+    methodend
+    
+    method protected String getLastName()
+        methodret #LastName!
+    methodend
+    
+    method protected String getCompany()
+        methodret #Company!
+    methodend
+    
+    method protected String getBillAddr1()
+        methodret #BillAddr1!
+    methodend
+    
+    method protected String getBillAddr2()
+        methodret #BillAddr2!
+    methodend
+    
+    method protected String getCity()
+        methodret #City!
+    methodend
+    
+    method protected String getState()
+        methodret #State!
+    methodend
+    
+    method protected String getCountry()
+        methodret #Country!
+    methodend
+    
+    method protected String getPostCode()
+        methodret #PostCode!
+    methodend
+    
+    method protected String getPhone()
+        methodret #Phone!
+    methodend
+    
+    method protected String getFax()
+        methodret #Fax!
+    methodend
+    
+    method protected String getSalesperson()
+        methodret #Salesperson!
+    methodend
+    
+    method protected String getShipZone()
+        methodret #ShipZone!
+    methodend
+    
+    method protected String getShipMethod()
+        methodret #ShipMethod!
+    methodend
+    
+    method protected java.math.BigDecimal getCurrentBal()
+        methodret #CurrentBal!
+    methodend
+    
+    method protected java.math.BigDecimal getOver30()
+        methodret #Over30!
+    methodend
+    
+    method protected java.math.BigDecimal getOver60()
+        methodret #Over60!
+    methodend
+    
+    method protected java.math.BigDecimal getOver90()
+        methodret #Over90!
+    methodend
+    
+    method protected java.math.BigDecimal getOver120()
+        methodret #Over120!
+    methodend
+    
+    method protected java.math.BigDecimal getSalesMtd()
+        methodret #SalesMtd!
+    methodend
+    
+    method protected java.math.BigDecimal getSalesYtd()
+        methodret #SalesYtd!
+    methodend
+    
+    method protected java.math.BigDecimal getSalesLy()
+        methodret #SalesLy!
+    methodend
+    
+    method protected java.sql.Date getLastPurchDate()
+        methodret #LastPurchDate!
+    methodend
+    
+    method protected java.sql.Date getLastPayDate()
+        methodret #LastPayDate!
+    methodend
+    
+    method protected String getCreditCode()
+        methodret #CreditCode!
+    methodend
+    
+
+    
+    method protected void setCustNum(String CustNum!)
+        #CustNum! = CustNum!
+    methodend
+    
+    method protected void setFirstName(String FirstName!)
+        #FirstName! = FirstName!
+    methodend
+    
+    method protected void setLastName(String LastName!)
+        #LastName! = LastName!
+    methodend
+    
+    method protected void setCompany(String Company!)
+        #Company! = Company!
+    methodend
+    
+    method protected void setBillAddr1(String BillAddr1!)
+        #BillAddr1! = BillAddr1!
+    methodend
+    
+    method protected void setBillAddr2(String BillAddr2!)
+        #BillAddr2! = BillAddr2!
+    methodend
+    
+    method protected void setCity(String City!)
+        #City! = City!
+    methodend
+    
+    method protected void setState(String State!)
+        #State! = State!
+    methodend
+    
+    method protected void setCountry(String Country!)
+        #Country! = Country!
+    methodend
+    
+    method protected void setPostCode(String PostCode!)
+        #PostCode! = PostCode!
+    methodend
+    
+    method protected void setPhone(String Phone!)
+        #Phone! = Phone!
+    methodend
+    
+    method protected void setFax(String Fax!)
+        #Fax! = Fax!
+    methodend
+    
+    method protected void setSalesperson(String Salesperson!)
+        #Salesperson! = Salesperson!
+    methodend
+    
+    method protected void setShipZone(String ShipZone!)
+        #ShipZone! = ShipZone!
+    methodend
+    
+    method protected void setShipMethod(String ShipMethod!)
+        #ShipMethod! = ShipMethod!
+    methodend
+    
+    method protected void setCurrentBal(java.math.BigDecimal CurrentBal!)
+        #CurrentBal! = CurrentBal!
+    methodend
+    
+    method protected void setOver30(java.math.BigDecimal Over30!)
+        #Over30! = Over30!
+    methodend
+    
+    method protected void setOver60(java.math.BigDecimal Over60!)
+        #Over60! = Over60!
+    methodend
+    
+    method protected void setOver90(java.math.BigDecimal Over90!)
+        #Over90! = Over90!
+    methodend
+    
+    method protected void setOver120(java.math.BigDecimal Over120!)
+        #Over120! = Over120!
+    methodend
+    
+    method protected void setSalesMtd(java.math.BigDecimal SalesMtd!)
+        #SalesMtd! = SalesMtd!
+    methodend
+    
+    method protected void setSalesYtd(java.math.BigDecimal SalesYtd!)
+        #SalesYtd! = SalesYtd!
+    methodend
+    
+    method protected void setSalesLy(java.math.BigDecimal SalesLy!)
+        #SalesLy! = SalesLy!
+    methodend
+    
+    method protected void setLastPurchDate(java.sql.Date LastPurchDate!)
+        #LastPurchDate! = LastPurchDate!
+    methodend
+    
+    method protected void setLastPayDate(java.sql.Date LastPayDate!)
+        #LastPayDate! = LastPayDate!
+    methodend
+    
+    method protected void setCreditCode(String CreditCode!)
+        #CreditCode! = CreditCode!
+    methodend
+    
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

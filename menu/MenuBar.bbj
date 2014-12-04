@@ -1,0 +1,156 @@
+use ::components/ui/unbound/menu/menu.bbj::MenuItem
+use ::components/ui/unbound/menu/menu.bbj::Menu
+use ::components/ui/unbound/menu/ResponsiveTouchMenuBar.bbj::ResponsiveTouchMenuBar
+use ::prog/gui/MenuSystemInit.bbj::MenuSystemInit
+use ::prog/gui/MenuSystemDialog.bbj::MenuSystemDialog
+use ::prog/gui/MenuSystemAuth.bbj::MenuSystemAuth
+
+
+
+declare Menu menu!
+declare auto MenuItem item!
+
+sysGui! = BBjAPI().openSysGui("X0")
+systemMetrics!=sysGui!.getSystemMetrics()
+screenSize!=systemMetrics!.getScreenSize()
+screenIns!=systemMetrics!.getScreenInsets()
+
+screen_w=screenSize!.width-(screenIns!.left+screenIns!.right)
+screen_h=screenSize!.height-(screenIns!.top+screenIns!.bottom)
+
+resource$ = "menu/Login.arc"
+resource = resopen(resource$)
+window!=sysGui!.createTopLevelWindow(resource,100)
+
+if BBjAPI().isInMDI() then
+    window!.setTitleBarVisible(0)
+    rem window!.maximize()
+    window!.setLocation(int(screen_w/2)-int(window!.getWidth()/2),int(screen_h/2)-int(window!.getHeight()/2))
+else
+    window!.setLocation(int(screen_w/2)-int(window!.getWidth()/2),int(screen_h/2)-int(window!.getHeight()/2))
+fi
+
+        declare auto BBjTopLevelWindow wnd! 
+        wnd! = sysGui!.addWindow(sysGui!.getAvailableContext(),10,10,800,30,"")
+        wnd!.addStyle("titlebanner")
+        wnd!.maximize()
+
+
+ebxUser!=window!.getEditBox("EbxUser")
+ebxPassword!=window!.getEditBox("EbpPassword")
+btnCon!=window!.getButton("BtnCon")
+txtMsg!=window!.getStaticText("TxtMsg")
+
+rem LogoId=#Window!.getAvailableControlID()
+rem #ImgLogo!=#Window!.addImageCtrl(LogoId,195,20,107,60,MenuSystemSession.getMenuSystemConfig().getDefaultImagesDir()+MenuSystemSession.getMenuSystemConfig().getCompanyLogo())
+
+btnCon!.setCallback(btnCon!.ON_BUTTON_PUSH,"loginUser")
+window!.setCallback(window!.ON_CLOSE,"closeWindow")
+ebxPassword!.setCallback(ebxPassword!.ON_EDIT_KEYPRESS,"pressKey")
+
+window!.setVisible(1)
+
+
+skip:
+PROCESS_EVENTS
+
+
+pressKey:
+    ev! = BBjAPI().getLastEvent()
+    if ev!.getKeyCode()=13 and cvs(ebxUser!.getText(),2)<>"" then
+        goto loginUser
+    endif
+    return
+
+closeWindow:
+    window!.setVisible(0)
+    if !window!.isDestroyed() then
+        window!.destroy()
+    endif
+    release
+
+loginUser:
+    benutzer$ = cvs(ebxUser!.getText(),3)
+    passwort$ = cvs(ebxPassword!.getText(),3)
+
+    menu! = new Menu()
+    starter! = new starter()
+    
+    it! = menu!.addMenuItem(null(),"item 1","")
+    menu!.addMenuItem(it!,1,"Flotte","","",starter!,"start","Flotte")
+    menu!.addMenuItem(it!,2,"Sinistre","","",starter!,"start","Sinistre")
+    menu!.addMenuItem(it!,3,"Message","","",starter!,"start","Message")
+
+    window!.destroy()
+
+
+        if BBjAPI().isInMDI() then
+          NorthBorder! = BBjAPI().getMDI().getNorthBorder()
+          NorthBorder!.setWindow(wnd!)
+        endif
+
+        
+        
+        m! = new ResponsiveTouchMenuBar(wnd!,100,0,0,0,0,menu!)
+        wnd!.setCallback(BBjAPI.ON_RESIZE,"resize")
+        gosub delayedResize
+
+        return
+    else
+        a=msgbox("Wrong login!")
+        return
+        goto byebye
+    endif
+
+byebye:bye
+
+login_errorhandler:
+    a=msgbox(errmes(-1),16,"Error")
+    goto byebye
+    return
+    
+    
+screenResize:
+    BBjAPI().removeTimer("delayedResize",err=*next)
+    BBjAPI().createTimer("delayedResize",1,"delayedResize")
+    return
+    
+resize:
+    BBjAPI().removeTimer("delayedResize",err=*next)
+    BBjAPI().createTimer("delayedResize",1,"delayedResize")
+    return
+    
+delayedResize:
+    BBjAPI().removeTimer("delayedResize",err=*next)
+
+    screenSize!=systemMetrics!.getScreenSize()
+    screenIns!=systemMetrics!.getScreenInsets()
+    
+    screen_w=screenSize!.width-(screenIns!.left+screenIns!.right)
+    screen_h=screenSize!.height-(screenIns!.top+screenIns!.bottom)    
+    w=screen_w
+    if w<700 then
+        h0=100
+        h1=40
+    else
+        h0=160
+        h1=80
+    fi
+    wnd!.setSize(w,h0)
+    m!.setSize(w,h1)
+    m!.setLocation(0,h0-h1)
+return
+
+
+class public starter
+
+    method public void start(Object payload!)
+        if str(payload!) = "Message" then
+            a=scall("bbj menu/Message.bbj - 1&")
+        fi
+        if str(payload!) = "Flotte" then
+            a=scall("bbj CustomerTouch.bbj &")
+        fi
+    methodend
+
+classend

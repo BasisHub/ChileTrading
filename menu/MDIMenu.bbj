@@ -1,0 +1,99 @@
+rem 1. Aufbau Menusystem Objekt
+rem 2. Dialog zur Anmeldung zeigen und gegen Menusystem anmelden
+
+rem 3. MDI aufbauen:
+declare BBjMDI mdi!
+open (unt)"X0"
+MDI! = BBjAPI().getMDI()
+
+REM create an MDI Window
+mdi!.createMDIWindow(0, 0, 10, 10, "",$00001002$ )
+
+
+BBjAPI().getGroupNamespace().setValue("MenuSystemMDIProgramName","MDIMenu.bbj")
+a=scall("bbj menu/MenuBar.bbj &")
+
+
+REM a=scall("bbj -WDD:\bsc\ FDebStamTouch.bbj&")
+REM add menu items to the MDI Window
+REM 
+REM menuBar! = mdi!.addMenuBar()
+REM AMenu!=menuBar!.addMenu(20,"Sample menu")
+REM MenuItem201! = AMenu!.addMenuItem(201, "Set BBj Command line params")
+REM MenuItem202! = AMenu!.addMenuItem(202, "Set Program Command line params")
+REM MenuItem203! = AMenu!.addMenuItem(203, "Run Program")
+REM MenuItem204! = AMenu!.addMenuItem(204, "add toolbars")
+REM MenuItem205! = AMenu!.addMenuItem(205, "Enable MDI WindowsMenu")
+REM 
+REM REM set callbacks
+REM 
+REM MenuItem201!.setCallback(menuBar!.ON_MENU_ITEM_SELECT, "selected_201")
+REM MenuItem202!.setCallback(menuBar!.ON_MENU_ITEM_SELECT, "selected_202")
+REM MenuItem203!.setCallback(menuBar!.ON_MENU_ITEM_SELECT, "selected_203")
+REM MenuItem204!.setCallback(menuBar!.ON_MENU_ITEM_SELECT, "selected_204")
+REM MenuItem205!.setCallback(menuBar!.ON_MENU_ITEM_SELECT, "selected_205")
+
+CALLBACK(ON_CLOSE,APP_CLOSE,mdi!.MDI_CONTEXT)
+mdi!.setCallback(mdi!.ON_CLOSE,"APP_CLOSE")
+
+REM Process Events
+
+PROCESS_EVENTS
+
+REM Callback routine called when the user closes the application window
+
+APP_CLOSE:
+if mdi!.closeAll(0) then
+    release
+else
+    return
+endif
+
+selected_201:
+print (0,ERR=doReturn) 'GETS'("","commandLineParams: ", cmdLineParams$)
+read cmdLineParams$
+return
+
+selected_202:
+print (0,ERR=doReturn) 'GETS'("","ProgramParams: ", programParams$)
+read programParams$
+return
+
+selected_203:
+filename$ = fileopen("choose file","/","","")
+if filename$ <> "::CANCEL::"
+command$ = "bbj " + cmdLineParams$ + " " + filename$ + " - " + programParams$ + " &"
+print "scalling: " , command$
+x = scall(command$)
+endif
+return
+
+selected_204:
+tb1! = mdi!.addToolButton(101,0,0,20,20,"1",$4000$)
+tb2! = mdi!.addToolButton(102,0,0,20,20,"2",$4000$)
+tb3! = mdi!.addToolButton(103,0,0,20,20,"3",$4000$)
+tb1!.setCallback(tb1!.ON_TOOL_BUTTON_PUSH,"tb1")
+tb2!.setCallback(tb1!.ON_TOOL_BUTTON_PUSH,"tb2")
+tb3!.setCallback(tb1!.ON_TOOL_BUTTON_PUSH,"tb3")
+menuItem204!.setEnabled( 0 )
+return
+
+TB1:
+print "1"
+RETURN
+
+TB2:
+print "2"
+RETURN
+
+TB3:
+print "3"
+RETURN
+
+selected_205:
+mdi!.enableMDIWindowMenu()
+menuItem205!.setEnabled( 0 )
+RETURN
+
+doReturn:
+return

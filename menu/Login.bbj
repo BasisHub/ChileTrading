@@ -1,0 +1,171 @@
+REM /**
+REM  * Login.bbj
+REM  * @author vkolarov
+REM  *
+REM  */
+
+use ::prog/gui/MenuSystemAuth.bbj::MenuSystemAuth
+use ::prog/gui/MenuSystemInit.bbj::MenuSystemInit
+use ::prog/gui/MenuSystemDialog.bbj::MenuSystemDialog
+use ::menu/MDIMenu.bbj::MDIMenu
+
+class public Login
+
+    rem static members (fields) are only created once for the class
+    field private static BBjAPI         API! = BBjAPI()
+    field private static BBjSysGui      SysGui! = BBjAPI().openSysGui("X0")
+    field private static BBjNumber      TRUE = BBjAPI().TRUE
+    field private static BBjNumber      FALSE = BBjAPI().FALSE
+
+    rem instance members (fields) are created for each new object instance
+    field private BBjTopLevelWindow Window!
+    field private BBjEditBox        EbxUser!
+    field private BBjEditBox        EbxPassword!
+    field private BBjImageCtrl      ImgLogo!
+    field private BBjButton         BtnCon!
+    field private BBjStaticText     TxtMsg!
+
+
+    method public Login()
+
+        systemMetrics!=#SysGui!.getSystemMetrics()
+        screenSize!=systemMetrics!.getScreenSize()
+        screenIns!=systemMetrics!.getScreenInsets()
+
+        screen_w=screenSize!.width-(screenIns!.left+screenIns!.right)
+        screen_h=screenSize!.height-(screenIns!.top+screenIns!.bottom)
+
+        resource$ = "menu/Login.arc"
+        resource = resopen(resource$)
+        #Window!=#SysGui!.createTopLevelWindow(resource,100)
+
+        if BBjAPI().isInMDI() then
+            #Window!.setTitleBarVisible(0)
+            #Window!.maximize()
+        else
+            #Window!.setLocation(int(screen_w/2)-int(#Window!.getWidth()/2),int(screen_h/2)-int(#Window!.getHeight()/2))
+        fi
+
+        #EbxUser!=#Window!.getEditBox("EbxUser")
+        #EbxPassword!=#Window!.getEditBox("EbpPassword")
+        #BtnCon!=#Window!.getButton("BtnCon")
+        #TxtMsg!=#Window!.getStaticText("TxtMsg")
+
+        rem LogoId=#Window!.getAvailableControlID()
+        rem #ImgLogo!=#Window!.addImageCtrl(LogoId,195,20,107,60,MenuSystemSession.getMenuSystemConfig().getDefaultImagesDir()+MenuSystemSession.getMenuSystemConfig().getCompanyLogo())
+
+        #BtnCon!.setCallback(#BtnCon!.ON_BUTTON_PUSH,#this!,"loginUser")
+        #Window!.setCallback(#Window!.ON_CLOSE,#this!,"closeWindow")
+        #EbxPassword!.setCallback(#EbxPassword!.ON_EDIT_KEYPRESS,#this!,"pressKey")
+
+        #Window!.setVisible(#TRUE)
+        #EbxUser!.focus()
+
+
+        process_events
+
+    methodend
+
+
+    method public void pressKey(BBjEditKeypressEvent ev!)
+        if ev!.getKeyCode()=13 and cvs(#EbxUser!.getText(),2)<>"" then
+            #loginUser(null())
+        else
+            #EbxUser!.focus()
+        endif
+    methodend
+
+
+    method public void loginUser(BBjEvent ev!)
+        benutzer$ = cvs(#EbxUser!.getText(),3)
+        passwort$ = cvs(#EbxPassword!.getText(),3)
+
+        #TxtMsg!.setText("")
+
+        #Window!.setCursor(#Window!.CURSOR_WAIT)
+        rem #TxtMsg!.setText(#Translator!.getTranslation("UserDataAreBeingLoaded"))
+
+        if MenuSystemAuth.loginUser(benutzer$,passwort$,3,err=errorhandler) then
+            #Window!.setCursor(#Window!.CURSOR_NORMAL)
+
+            #Window!.setVisible(0)
+            if !#Window!.isDestroyed() then
+                #Window!.destroy()
+            endif
+
+            declare MenuSystemDialog menuSystemDialog!
+            menuSystemDialog! = new MenuSystemDialog(0)
+            model! = menuSystemDialog!.getMenuModel()
+            BBjAPI().getGroupNamespace().setValue("webfleet_menu_dialog",menuSystemDialog!)
+            call("menu/MDIMenu.bbj")
+            release
+        else
+            rem Errors occured on external users are NOT logged
+            #showLoginFailedMessage()
+
+REM             declare MenuActivityLogEC menuActivityLog!
+REM             menuActivityLog!=new MenuActivityLogEC()
+REM             menuActivityLog!.setActivity(#Translator!.getTranslation("LoginAttempt"))
+REM             menuActivityLog!.setActivityDetail(#Translator!.getTranslation("SystemUser")+info(3,2)+" "+#Translator!.getTranslation("ClientHost")+info(3,7))
+REM             menuActivityLog!.setClientId("")
+REM             menuActivityLog!.setMenuItemId("")
+REM             menuActivityLog!.setUserId("")
+REM             MenuSystemInit.getDBConnect().addMenuActivityLog(menuActivityLog!)
+
+            benutzer$="", passwort$=""
+
+            #TxtMsg!.setText("")
+            #EbxPassword!.setText("")
+            #Window!.setCursor(#Window!.CURSOR_NORMAL)
+            #EbxUser!.focus()
+        endif
+
+        methodret
+
+
+        errorhandler:
+            if err() = 300 then
+                a = msgbox(errmes(-1))
+                release
+            else
+                a=msgbox(errmes(-1))
+            endif
+
+REM             declare MenuActivityLogEC menuActivityLog!
+REM             menuActivityLog!=new MenuActivityLogEC()
+REM             menuActivityLog!.setActivity(#Translator!.getTranslation("LoginAttempt"))
+REM             menuActivityLog!.setActivityDetail(#Translator!.getTranslation("SystemUser")+info(3,2)+" "+#Translator!.getTranslation("ClientHost")+info(3,7)+" "+errmes(-1))
+REM             menuActivityLog!.setClientId("")
+REM             menuActivityLog!.setMenuItemId("")
+REM             menuActivityLog!.setUserId(benutzer$)
+REM             MenuSystemInit.getDBConnect().addMenuActivityLog(menuActivityLog!)
+
+            #TxtMsg!.setText("")
+            #EbxPassword!.setText("")
+            #Window!.setCursor(#Window!.CURSOR_NORMAL)
+            #EbxUser!.focus()
+    methodend
+
+
+    method private void showLoginFailedMessage()
+        rem a = msgbox(#Translator!.getTranslation("LoginFailed"),16,#Translator!.getTranslation("User"))
+        a = msgbox("Wrong login!")
+        #EbxPassword!.setText("")
+        #EbxUser!.focus()
+    methodend
+
+
+    method public void closeWindow(BBjEvent ev!)
+        #Window!.setVisible(0)
+        if !#Window!.isDestroyed() then
+            #Window!.destroy()
+        endif
+        release
+    methodend
+
+classend
+
+
+BBjAPI().getNamespace("eu.basis-europe.menu","install",BBjAPI().TRUE).setValue("instdir",instdir$(1,max(pos("\"=instdir$,-1,3),pos("/"=instdir$,-1,3))))
+init! = new MenuSystemInit(3)
+l! = new Login()

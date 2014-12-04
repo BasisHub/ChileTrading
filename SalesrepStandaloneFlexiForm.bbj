@@ -1,0 +1,14 @@
+use ::ui/SalesrepFlexiForm.bbj::SalesrepFlexiForm
+use ::bl/SalesrepBusinessComponent.bbj::SalesrepBusinessComponent
+
+declare SalesrepFlexiForm        EditForm!
+declare SalesrepBusinessComponent bc!
+
+bc! = new SalesrepBusinessComponent()
+
+EditForm! = new SalesrepFlexiForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

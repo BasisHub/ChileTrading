@@ -1,0 +1,154 @@
+use com.basiscomponents.db.DataRow
+
+rem /**
+rem * SalesrepEntityT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public SalesrepEntityT extends DataRow
+
+    
+    field protected String Salesperson!
+    
+    field protected String Name!
+    
+    field protected String Address!
+    
+    field protected String Address2!
+    
+    field protected String City!
+    
+    field protected String State!
+    
+    field protected String Zip!
+    
+    field protected String Phone!
+    
+    field protected java.math.BigDecimal CommRate!
+    
+    field protected String CommType!
+    
+
+    
+    method protected String getSalesperson()
+        methodret #Salesperson!
+    methodend
+    
+    method protected String getName()
+        methodret #Name!
+    methodend
+    
+    method protected String getAddress()
+        methodret #Address!
+    methodend
+    
+    method protected String getAddress2()
+        methodret #Address2!
+    methodend
+    
+    method protected String getCity()
+        methodret #City!
+    methodend
+    
+    method protected String getState()
+        methodret #State!
+    methodend
+    
+    method protected String getZip()
+        methodret #Zip!
+    methodend
+    
+    method protected String getPhone()
+        methodret #Phone!
+    methodend
+    
+    method protected java.math.BigDecimal getCommRate()
+        methodret #CommRate!
+    methodend
+    
+    method protected String getCommType()
+        methodret #CommType!
+    methodend
+    
+
+    
+    method protected void setSalesperson(String Salesperson!)
+        #Salesperson! = Salesperson!
+    methodend
+    
+    method protected void setName(String Name!)
+        #Name! = Name!
+    methodend
+    
+    method protected void setAddress(String Address!)
+        #Address! = Address!
+    methodend
+    
+    method protected void setAddress2(String Address2!)
+        #Address2! = Address2!
+    methodend
+    
+    method protected void setCity(String City!)
+        #City! = City!
+    methodend
+    
+    method protected void setState(String State!)
+        #State! = State!
+    methodend
+    
+    method protected void setZip(String Zip!)
+        #Zip! = Zip!
+    methodend
+    
+    method protected void setPhone(String Phone!)
+        #Phone! = Phone!
+    methodend
+    
+    method protected void setCommRate(java.math.BigDecimal CommRate!)
+        #CommRate! = CommRate!
+    methodend
+    
+    method protected void setCommType(String CommType!)
+        #CommType! = CommType!
+    methodend
+    
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

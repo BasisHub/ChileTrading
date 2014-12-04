@@ -1,0 +1,309 @@
+use com.basiscomponents.db.DataRow
+use com.basiscomponents.db.DataField
+use ::components/bl/ValidationError.bbj::ValidationError
+
+use ::generated/SalesrepBusinessComponentT.bbj::SalesrepBusinessComponentT
+use ::bl/SalesrepEntity.bbj::SalesrepEntity
+
+rem /**
+rem * SalesrepBusinessComponentT
+rem *
+rem * Auto-generated business logic class
+rem * override to implement custom behavior that belongs to application logic
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public SalesrepBusinessComponent extends SalesrepBusinessComponentT
+
+    rem place your own field definitions for the business logic here:
+
+    rem /**
+    rem * Method SalesrepBusinessComponent():
+    rem * standard constructor
+    rem * override to setup the business component
+    rem */
+    method public SalesrepBusinessComponent()
+
+        #super!()
+
+        #setAllowFilter(1)
+        #setAllowSort(1)
+
+        #setupImportedKeys()
+
+    methodend
+
+    rem /**
+    rem * Method setupImportedKeys:
+    rem * setup the foreign key relations for the fields in the entity
+    rem * override to set the foreign key relations that have not been determined from the database layout
+    rem */
+    method protected void setupImportedKeys()
+
+        rem remove the following statement to omit the auto-generated foreign key relations
+        #super!.setupImportedKeys()
+
+        rem TODO: add foreign key releations that may not have been defined in the database
+        rem (don't forget to set up the foreign key in SalesrepForm::setupImportedKeys() if you wish a linked form)
+        rem sample:
+
+        rem fk_bc! = new ::bl/xyzBusinessComponent.bbj::xyzBusinessComponent()
+        rem #setForeignKeyPointer("COLUMNNAME",fk_bc!,"KEY_COLUMN_NAME_IN_OTHER_TABLE")
+
+        rem or, to do lazy loading, do:
+        
+        rem #registerForeignKeyPointerClass("COLUMNNAME","::bl/xyzBusinessComponent.bbj::xyzBusinessComponent","KEY_COLUMN_NAME_IN_OTHER_TABLE")
+
+    methodend
+
+    rem /**
+    rem * Method getColumnAttributes:
+    rem * override to set your own column attributes
+    rem * @return DataRow attr!: an instance of a DataRow holding all attributes that are valid for all rows of this entity
+    rem */
+    method public DataRow getColumnAttributes()
+
+        declare auto DataRow attr!
+
+        if #super!.hasSetColumnAttributes() then
+
+            attr! = #super!.getColumnAttributes()
+
+        else
+
+            attr! = #super!.getColumnAttributes()
+            rem TODO: set column attributes here
+
+            rem setting tab orders for dynamic forms like BUI and JSON clients
+            rem attr!.setFieldAttribute("SALESPERSON","TABORDER","")
+            rem attr!.setFieldAttribute("NAME","TABORDER","")
+            rem attr!.setFieldAttribute("ADDRESS","TABORDER","")
+            rem attr!.setFieldAttribute("ADDRESS2","TABORDER","")
+            rem attr!.setFieldAttribute("CITY","TABORDER","")
+            rem attr!.setFieldAttribute("STATE","TABORDER","")
+            rem attr!.setFieldAttribute("ZIP","TABORDER","")
+            rem attr!.setFieldAttribute("PHONE","TABORDER","")
+            rem attr!.setFieldAttribute("COMM_RATE","TABORDER","")
+            rem attr!.setFieldAttribute("COMM_TYPE","TABORDER","")
+                       
+
+            attr!.setFieldAttribute("SALESPERSON","SQL_TYPE","1")
+            attr!.setFieldAttribute("SALESPERSON","PRECISION","3")
+            attr!.setFieldAttribute("SALESPERSON","SCALE","0")
+            attr!.setFieldAttribute("NAME","SQL_TYPE","1")
+            attr!.setFieldAttribute("NAME","PRECISION","30")
+            attr!.setFieldAttribute("NAME","SCALE","0")
+            attr!.setFieldAttribute("ADDRESS","SQL_TYPE","1")
+            attr!.setFieldAttribute("ADDRESS","PRECISION","30")
+            attr!.setFieldAttribute("ADDRESS","SCALE","0")
+            attr!.setFieldAttribute("ADDRESS2","SQL_TYPE","1")
+            attr!.setFieldAttribute("ADDRESS2","PRECISION","30")
+            attr!.setFieldAttribute("ADDRESS2","SCALE","0")
+            attr!.setFieldAttribute("CITY","SQL_TYPE","1")
+            attr!.setFieldAttribute("CITY","PRECISION","20")
+            attr!.setFieldAttribute("CITY","SCALE","0")
+            attr!.setFieldAttribute("STATE","SQL_TYPE","1")
+            attr!.setFieldAttribute("STATE","PRECISION","2")
+            attr!.setFieldAttribute("STATE","SCALE","0")
+            attr!.setFieldAttribute("ZIP","SQL_TYPE","1")
+            attr!.setFieldAttribute("ZIP","PRECISION","10")
+            attr!.setFieldAttribute("ZIP","SCALE","0")
+            attr!.setFieldAttribute("PHONE","SQL_TYPE","1")
+            attr!.setFieldAttribute("PHONE","PRECISION","15")
+            attr!.setFieldAttribute("PHONE","SCALE","0")
+            attr!.setFieldAttribute("COMM_RATE","SQL_TYPE","2")
+            attr!.setFieldAttribute("COMM_RATE","PRECISION","11")
+            attr!.setFieldAttribute("COMM_RATE","SCALE","8")
+            attr!.setFieldAttribute("COMM_TYPE","SQL_TYPE","1")
+            attr!.setFieldAttribute("COMM_TYPE","PRECISION","1")
+            attr!.setFieldAttribute("COMM_TYPE","SCALE","0")
+               
+                                    
+        fi
+
+        methodret attr!
+
+    methodend
+
+    rem /**
+    rem * Method processRecord:
+    rem * override to set your own field attributes for each row
+    rem * @param DataRow row!: the entity to be examined and enriched
+    rem * @return DataRow attr!: an instance of a DataRow holding all attributes that are valid for all rows of this entity
+    rem */
+    method protected DataRow processRecord(DataRow row!)
+
+        rem TODO: set attributes on row level here, and set contents for computed / derived fields
+
+        methodret row!
+
+    methodend
+
+    rem /**
+    rem * Method onBeforeInsert:
+    rem * called immediately before a row will be inserted
+    rem * @param DataRow row!: the row to be inserted
+    rem * @return DataRow row!: the row after preparation; null() to abort
+    rem */
+    method protected DataRow onBeforeInsert(DataRow row!)
+
+        rem override this method for final processing of a record before it's inserted
+        rem sample:
+        rem ts! = new java.sql.Timestamp(new java.util.Date().getTime())
+        rem row!.setFieldValue("created",ts!)
+        rem row!.setFieldValue("updated",ts!)
+        rem row!.setFieldValue("created_by",1)
+        rem row!.setFieldValue("updated_by",1)
+
+        methodret row!
+
+    methodend
+    
+    rem /**
+    rem * Method onAfterInsert:
+    rem * called immediately after a row was inserted
+    rem * @param DataRow row!: the row just inserted
+    rem */
+    method protected void onAfterInsert(DataRow row!)
+
+    methodend    
+
+    rem /**
+    rem * Method onBeforeUpdate:
+    rem * called immediately before a row will be inserted
+    rem * @param DataRow row!: the row to be inserted
+    rem * @param DataRow orig_row!: the original row from the resultset
+    rem * @return DataRow row!: the row after preparation; null() to abort
+    rem */
+    method protected DataRow onBeforeUpdate(DataRow row!, DataRow orig_row!)
+
+        rem override this method for final processing of a record before it's updated
+        rem sample:
+        rem ts! = new java.sql.Timestamp(new java.util.Date().getTime())
+        rem row!.setFieldValue("updated",ts!)
+        rem row!.setFieldValue("updated_by",1)
+
+        methodret row!
+
+    methodend
+
+    rem * Method onAfterUpdate:
+    rem * called immediately after a row was be updated
+    rem * @param DataRow row!: the row to be updated - new contents
+    rem * @param DataRow orig_row!: the original row from the resultset
+    rem */
+    method protected void onAfterUpdate(DataRow row!, DataRow orig_row!)
+
+    methodend
+
+    rem /**
+    rem * Method onBeforeDelete:
+    rem * called immediately before one or more rows will be deleted
+    rem * @param BBjVector sel!: the selected rows to be deleted
+    rem * @return BBjVector sel!: the rows to be deleted
+    rem */    
+    method public BBjVector onBeforeDelete(BBjVector sel!)
+    
+        methodret sel!
+        
+    methodend 
+    
+    rem /**
+    rem * Method validateRecord:
+    rem * override this method for validating a record before it's written
+    rem * @param DataRow row!: the row to be inserted
+    rem * @param DataRow orig_row!: the original row from the resultset; if null() the record is new
+    rem * @return BBjNumber fail: 0=passed, 1=errors were reported
+    rem */
+    method protected BBjNumber validateRecord(DataRow row!, DataRow orig_row!)
+
+        fail=#super!.validateRecord(row!, orig_row!)
+
+        rem put additional validation here
+        rem sample:
+
+        rem if row!.getFieldAsString("TITLE")="" then
+        rem  v_err! = new ValidationError(ValidationError.ERROR(),"TITLE","Title must not be empty!")
+        rem  #addValidationError(v_err!)
+        rem  fail=max(fail,ValidationError.ERROR())
+        rem fi
+
+        rem if row!.getFieldAsString("ARTIST")="" then
+        rem  v_err! = new ValidationError(ValidationError.NOTICE(),"ARTIST","Artist not set.")
+        rem  #addValidationError(v_err!)
+        rem  fail=max(fail,ValidationError.NOTICE())
+        rem fi
+
+        methodret fail
+
+    methodend
+
+    rem /**
+    rem * Method validateField:
+    rem * override this method for validating a record before it's written
+    rem * @param BBjString fieldName$: the field name
+    rem * @param BBjString fieldValue$: the field value to be validated
+    rem * @param DataRow origRow!: the original row from the resultset; if null() the record is new
+    rem * @param java.util.HashMap otherEdits: other edits that are currently unsaved
+    rem * @return BBjNumber fail: 0=passed, 1=errors were reported
+    rem */
+    method public BBjNumber validateField(BBjString fieldName$, BBjString fieldValue$, DataRow origRow!, java.util.HashMap otherEdits!)
+
+        fail=#super!.validateField(fieldName$, fieldValue$, origRow!, otherEdits!)
+
+        rem put additional validation here
+        rem sample:
+
+        rem  if fieldName$ = "RECORDINGTYPE" then
+        rem      if pos(fieldValue$="AAA AAD ADD DDD")=0 then
+        rem            v_err! = new ValidationError(ValidationError.WARN(),"RECORDINGTYPE","Unknown Recording Type!")
+        rem            #addValidationError(fieldName$,v_err!)
+        rem            fail=ValidationError.NOTICE()
+        rem      else
+        rem            #clearValidationError(fieldName$)
+        rem      fi
+        rem  fi
+
+        methodret fail
+
+    methodend
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

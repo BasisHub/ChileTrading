@@ -1,0 +1,85 @@
+use ::components/db/DataProvider.bbj::DataProvider
+use com.basiscomponents.db.DataRow
+
+rem /**
+rem * SalesrepDataProviderT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public SalesrepDataProviderT extends DataProvider
+
+    rem /**
+    rem * Method SalesrepDataProviderT():
+    rem * standard constructor
+    rem */
+    method public SalesrepDataProviderT()
+
+        #setupDatabaseLink()
+
+    methodend
+
+    rem /**
+    rem * Method setupDatabaseLink:
+    rem * this method does setup the database sql and the key information
+    rem */
+    method protected void setupDatabaseLink()
+
+        #setDataSource("ChileTrading")
+        #setSchema("")
+        #setSchemaPfx("")        
+        
+        #setDataSource(STBL("DATABASE",err=*next))
+        #setSchema(STBL("SCHEMA",err=*next)); #setSchemaPfx(STBL("SCHEMA")+".")
+
+        #setSQL("SELECT SALESPERSON,NAME,ADDRESS,ADDRESS2,CITY,STATE,ZIP,PHONE,COMM_RATE,COMM_TYPE FROM SALESREP")
+        #setPrimaryTable("SALESREP")
+        
+        #addPrimaryKeySegment("SALESPERSON")
+        
+        rem template because of ms sql server problem
+        rem #addPrimaryKeySegment("intID")
+        #setEntityClass(DataRow.newInstance())
+
+    methodend
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

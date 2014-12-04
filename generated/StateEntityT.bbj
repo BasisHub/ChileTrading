@@ -1,0 +1,74 @@
+use com.basiscomponents.db.DataRow
+
+rem /**
+rem * StateEntityT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public StateEntityT extends DataRow
+
+    
+    field protected String Code!
+    
+    field protected String Name!
+    
+
+    
+    method protected String getCode()
+        methodret #Code!
+    methodend
+    
+    method protected String getName()
+        methodret #Name!
+    methodend
+    
+
+    
+    method protected void setCode(String Code!)
+        #Code! = Code!
+    methodend
+    
+    method protected void setName(String Name!)
+        #Name! = Name!
+    methodend
+    
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

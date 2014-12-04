@@ -1,0 +1,81 @@
+REM if INFO(3,6)<>"5" then 
+REM     ::components/util/Util.bbj::Util.runAsBui(pgm(-1))
+REM fi
+
+use ::components/ui/unbound/WindowStack.bbj::WindowStack
+use ::ui/CustomerTouchScreenCombo.bbj::CustomerTouchScreenCombo
+use ::bl/CustomerBusinessComponent.bbj::CustomerBusinessComponent
+
+
+rem * this sample shows a touch version of a search grid + form
+rem * embedded in a child window
+rem * note that WindowStack by default can be used
+rem * to achieve a full screen display of the screen
+
+
+listpagesize$ = stbl("!LIST_PAGE_SIZE","10")
+BBjAPI().getConfig().setOptionSetting("FAST_TOUCH_CLICK", 1)
+
+sg!         = BBjAPI().openSysGui("X0")
+
+
+w=1200
+h=600
+screenSize! = BBjAPI().getSysGui().getSystemMetrics().getScreenSize()
+REM w=screenSize!.width
+REM h=screenSize!.height
+
+wnd!        = sg!.addWindow(0,0,w,h,"",$01080010$ )
+REM wnd!        = sg!.addWindow(0,0,640,480,"",$01081010$ )
+
+wnd!.setCallback(BBjAPI.ON_SCREEN_RESIZE,"resize")
+wnd!.setCallback(BBjAPI.ON_RESIZE,"resize")
+wnd!.setCallback(wnd!.ON_CLOSE,"byebye")
+
+frame!      = wnd!.addChildWindow(100,0,0,w,h,"",$00000800$,BBjAPI().getSysGui().getAvailableContext())
+frame!.setBackColor(BBjAPI().makeColor("YELLOW"))
+
+WindowStack.setContainerWnd(frame!)
+bc!         = new CustomerBusinessComponent()
+cw!         = WindowStack.openWindow(bc!.getTitle())
+ctc!        = new CustomerTouchScreenCombo(cw!, bc!)
+WindowStack.setWidget(ctc!)
+
+REM myTopBar!   = wnd!.addStaticText(110, 0, 0, w, 40, "")
+REM myTopBar!.setName("topGradientBar")
+REM wnd!.addImage(111,0,0,2500,40,"components/css/banner.png")
+
+REM myStatusBar! = wnd!.addStaticText(112, 0, h-20, w, 20, "") 
+REM myStatusBar!.setName("topGradientBar")
+
+myExit!     = wnd!.addButton(200, w-24-8, 8, 30, 30, "")
+myExit!.setName("exitButton")
+myExit!.setCallback(BBjAPI.ON_BUTTON_PUSH, "byebye")
+
+wnd!.setVisible(1)
+
+gosub delayedResize 
+
+process_events
+
+byebye:
+    bye
+
+resize:
+
+       BBjAPI().removeTimer("CustomerTouchDelayedResize",err=*next)
+       BBjAPI().createTimer("CustomerTouchDelayedResize",.5,"delayedResize")
+return
+
+delayedResize:
+       BBjAPI().removeTimer("CustomerTouchDelayedResize",err=*next)
+      screenSize! = BBjAPI().getSysGui().getSystemMetrics().getScreenSize()
+      w = screenSize!.width -10
+      h = screenSize!.height -200
+      wnd!.setSize(w,h)
+      myExit!.setLocation(w-24-8,8)
+      frame!.setSize(w,h)
+      WindowStack.resize(w,h)
+return
+
+

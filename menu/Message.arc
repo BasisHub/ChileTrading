@@ -1,0 +1,62 @@
+//#charset: windows-1252
+
+VERSION "4.0"
+
+WINDOW 101 "Window" 0 0 537 252
+BEGIN
+    BACKGROUNDCOLOR RGB(240,240,240)
+    NOT CLOSEBOX
+    EVENTMASK 3287287500
+    KEYBOARDNAVIGATION
+    NOT MAXIMIZABLE
+    NOT MINIMIZABLE
+    MAXIMIZED
+    NAME "Form"
+    NOTITLEBAR
+    NOT SIZABLE
+    VSCROLLBAR
+    STATICTEXT 102, "Subject:", 30, 45, 60, 20
+    BEGIN
+        NAME "LB_SUBJECT"
+        NOT OPAQUE
+    END
+
+    STATICTEXT 104, "Message: ", 30, 75, 64, 20
+    BEGIN
+        NAME "LBL_MESSAGE"
+    END
+
+    CUSTOMEDIT 105, "", 95, 75, 399, 122
+    BEGIN
+        CLIENTEDGE
+        NAME "MESSAGE"
+    END
+
+    BUTTON 106, "Send", 351, 205, 70, 25
+    BEGIN
+        NAME "BTN_SEND"
+    END
+
+    BUTTON 107, "Cancel", 427, 205, 70, 25
+    BEGIN
+        NAME "BTN_CANCEL"
+    END
+
+    LISTBUTTON 108, "", 94, 45, 399, 100
+    BEGIN
+        NAME "SUBJECT_LIST"
+    END
+
+    STATICTEXT 100, "From: ", 32, 15, 60, 20
+    BEGIN
+        NAME "LB_FROM"
+    END
+
+    STATICTEXT 101, "", 98, 15, 155, 20
+    BEGIN
+        NAME "LB_USER_MAIL"
+        NOT OPAQUE
+    END
+
+END
+

@@ -1,0 +1,14 @@
+use ::ui/ShipZoneForm.bbj::ShipZoneForm
+use ::bl/ShipZoneBusinessComponent.bbj::ShipZoneBusinessComponent
+
+declare ShipZoneForm        EditForm!
+declare ShipZoneBusinessComponent bc!
+
+bc! = new ShipZoneBusinessComponent()
+
+EditForm! = new ShipZoneForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

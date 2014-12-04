@@ -1,0 +1,14 @@
+use ::ui/CountryFlexiForm.bbj::CountryFlexiForm
+use ::bl/CountryBusinessComponent.bbj::CountryBusinessComponent
+
+declare CountryFlexiForm        EditForm!
+declare CountryBusinessComponent bc!
+
+bc! = new CountryBusinessComponent()
+
+EditForm! = new CountryFlexiForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+

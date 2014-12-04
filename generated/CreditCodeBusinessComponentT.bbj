@@ -1,0 +1,130 @@
+use com.basiscomponents.db.DataRow
+use com.basiscomponents.db.DataField
+use ::components/bl/DataProviderBusinessComponent.bbj::DataProviderBusinessComponent
+use ::translations/bbtranslator.bbj::BBTranslator
+use ::i18n/CustomTranslator.bbj::CustomTranslator
+
+use ::db/CreditCodeDataProvider.bbj::CreditCodeDataProvider
+
+rem /**
+rem * CreditCodeBusinessComponentT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public CreditCodeBusinessComponentT extends DataProviderBusinessComponent
+
+    field public BBTranslator Translator!
+
+    rem /**
+    rem * Method CreditCodeBusinessComponentT():
+    rem * standard constructor
+    rem */
+    method public CreditCodeBusinessComponentT()
+
+        #super!.setDataProvider(new CreditCodeDataProvider())
+        #super!.setResultSet(#getDataProvider().getResultSet())
+
+        #super!.setLocale(BBjAPI().getThinClient(err=*next).getClientLocale())
+
+        if #super!.getLocale() = ""
+            #super!.setLocale(stbl("!LOCALE"))
+        fi
+
+        #Translator! = new CustomTranslator()
+        rem old: #Translator! = BBTranslator.getInstance("ChileTrading",#getLocale(),"en","i18n/")
+        
+        #super!.setTitle(#Translator!.getTranslation("CREDIT_CODE.label"))
+
+
+    methodend
+
+    rem /**
+    rem * Method setupImportedKeys:
+    rem * setup the foreign key relations for the fields in the entity
+    rem */
+    method protected void setupImportedKeys()
+
+        v! = BBjAPI().getRuntime().getBBjStack()
+
+        for i=1 to v!.size()-1
+            s! = v!.getItem(i)
+
+            if pos("CreditCodeBusinessComponentT"=str(s!.getClassName()))>0 and str(s!.getMethodName())="setupImportedKeys" then
+                rem "circle reference"
+
+                methodret
+
+            fi
+
+        next
+
+        
+
+    methodend
+
+    rem /**
+    rem * Method setupImportedKeys:
+    rem * setup the foreign key relations for the fields in the entity
+    rem * @return DataRow attr!: an instance of a DataRow holding all attributes that are valid for all rows of this entity
+    rem */
+    method public DataRow getColumnAttributes()
+
+        declare auto DataRow attr!
+        declare DataRow attr!
+        declare BBTranslator Translator!
+
+        if #super!.hasSetColumnAttributes() then
+
+            attr! = #super!.getColumnAttributes()
+
+        else
+            attr! = #super!.getColumnAttributes()
+            fl! = attr!.getFieldNames()
+
+            if fl!.size() then
+
+                for i=0 to fl!.size()-1
+                    col_name$ = fl!.getItem(i)
+                    label$=""
+                    label$=#Translator!.getTranslation("CREDIT_CODE."+col_name$+".label")
+
+                    if label$>"" then
+                        attr!.setFieldAttribute(col_name$,"LABEL",label$)
+                    fi
+
+                next
+
+            fi
+
+        fi
+
+        methodret attr!
+
+    methodend
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

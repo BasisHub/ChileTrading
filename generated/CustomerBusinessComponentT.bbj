@@ -1,0 +1,196 @@
+use com.basiscomponents.db.DataRow
+use com.basiscomponents.db.DataField
+use ::components/bl/DataProviderBusinessComponent.bbj::DataProviderBusinessComponent
+use ::translations/bbtranslator.bbj::BBTranslator
+use ::i18n/CustomTranslator.bbj::CustomTranslator
+
+use ::db/CustomerDataProvider.bbj::CustomerDataProvider
+
+rem /**
+rem * CustomerBusinessComponentT
+rem *
+rem * Auto-generated entity class
+rem * DO NOT PUT ANY CHANGES HERE !
+rem * THIS CLASS WILL BE OVERWRITTEN BY EACH CODE GENERATION !
+rem *
+rem * 
+rem * @version 1.0
+rem */
+class public CustomerBusinessComponentT extends DataProviderBusinessComponent
+
+    field public BBTranslator Translator!
+
+    rem /**
+    rem * Method CustomerBusinessComponentT():
+    rem * standard constructor
+    rem */
+    method public CustomerBusinessComponentT()
+
+        #super!.setDataProvider(new CustomerDataProvider())
+        #super!.setResultSet(#getDataProvider().getResultSet())
+
+        #super!.setLocale(BBjAPI().getThinClient(err=*next).getClientLocale())
+
+        if #super!.getLocale() = ""
+            #super!.setLocale(stbl("!LOCALE"))
+        fi
+
+        #Translator! = new CustomTranslator()
+        rem old: #Translator! = BBTranslator.getInstance("ChileTrading",#getLocale(),"en","i18n/")
+        
+        #super!.setTitle(#Translator!.getTranslation("CUSTOMER.label"))
+
+
+    methodend
+
+    rem /**
+    rem * Method setupImportedKeys:
+    rem * setup the foreign key relations for the fields in the entity
+    rem */
+    method protected void setupImportedKeys()
+
+        v! = BBjAPI().getRuntime().getBBjStack()
+
+        for i=1 to v!.size()-1
+            s! = v!.getItem(i)
+
+            if pos("CustomerBusinessComponentT"=str(s!.getClassName()))>0 and str(s!.getMethodName())="setupImportedKeys" then
+                rem "circle reference"
+
+                methodret
+
+            fi
+
+        next
+
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_CountryIDCOUNTRY
+REM             fk_bc! = new ::bl/CountryBusinessComponent.bbj::CountryBusinessComponent()
+REM             #setForeignKeyPointer("COUNTRY",fk_bc!,"ID")
+REM         err_CountryIDCOUNTRY:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("COUNTRY","::bl/CountryBusinessComponent.bbj::CountryBusinessComponent","ID")
+            
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_CreditCodeCODECREDIT_CODE
+REM             fk_bc! = new ::bl/CreditCodeBusinessComponent.bbj::CreditCodeBusinessComponent()
+REM             #setForeignKeyPointer("CREDIT_CODE",fk_bc!,"CODE")
+REM         err_CreditCodeCODECREDIT_CODE:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("CREDIT_CODE","::bl/CreditCodeBusinessComponent.bbj::CreditCodeBusinessComponent","CODE")
+            
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_SalesrepSALESPERSONSALESPERSON
+REM             fk_bc! = new ::bl/SalesrepBusinessComponent.bbj::SalesrepBusinessComponent()
+REM             #setForeignKeyPointer("SALESPERSON",fk_bc!,"SALESPERSON")
+REM         err_SalesrepSALESPERSONSALESPERSON:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("SALESPERSON","::bl/SalesrepBusinessComponent.bbj::SalesrepBusinessComponent","SALESPERSON")
+            
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_ShipMethodCODESHIP_METHOD
+REM             fk_bc! = new ::bl/ShipMethodBusinessComponent.bbj::ShipMethodBusinessComponent()
+REM             #setForeignKeyPointer("SHIP_METHOD",fk_bc!,"CODE")
+REM         err_ShipMethodCODESHIP_METHOD:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("SHIP_METHOD","::bl/ShipMethodBusinessComponent.bbj::ShipMethodBusinessComponent","CODE")
+            
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_ShipZoneCODESHIP_ZONE
+REM             fk_bc! = new ::bl/ShipZoneBusinessComponent.bbj::ShipZoneBusinessComponent()
+REM             #setForeignKeyPointer("SHIP_ZONE",fk_bc!,"CODE")
+REM         err_ShipZoneCODESHIP_ZONE:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("SHIP_ZONE","::bl/ShipZoneBusinessComponent.bbj::ShipZoneBusinessComponent","CODE")
+            
+        
+        
+REM         rem this would be deprecated as the following line offers lazy loading of the objects only when needed         
+REM         seterr err_StateCODESTATE
+REM             fk_bc! = new ::bl/StateBusinessComponent.bbj::StateBusinessComponent()
+REM             #setForeignKeyPointer("STATE",fk_bc!,"CODE")
+REM         err_StateCODESTATE:
+REM         seterr 0
+
+        #registerForeignKeyPointerClass("STATE","::bl/StateBusinessComponent.bbj::StateBusinessComponent","CODE")
+            
+        
+
+    methodend
+
+    rem /**
+    rem * Method setupImportedKeys:
+    rem * setup the foreign key relations for the fields in the entity
+    rem * @return DataRow attr!: an instance of a DataRow holding all attributes that are valid for all rows of this entity
+    rem */
+    method public DataRow getColumnAttributes()
+
+        declare auto DataRow attr!
+        declare DataRow attr!
+        declare BBTranslator Translator!
+
+        if #super!.hasSetColumnAttributes() then
+
+            attr! = #super!.getColumnAttributes()
+
+        else
+            attr! = #super!.getColumnAttributes()
+            fl! = attr!.getFieldNames()
+
+            if fl!.size() then
+
+                for i=0 to fl!.size()-1
+                    col_name$ = fl!.getItem(i)
+                    label$=""
+                    label$=#Translator!.getTranslation("CUSTOMER."+col_name$+".label")
+
+                    if label$>"" then
+                        attr!.setFieldAttribute(col_name$,"LABEL",label$)
+                    fi
+
+                next
+
+            fi
+
+        fi
+
+        methodret attr!
+
+    methodend
+
+classend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

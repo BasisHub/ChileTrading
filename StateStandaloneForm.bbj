@@ -1,0 +1,14 @@
+use ::ui/StateForm.bbj::StateForm
+use ::bl/StateBusinessComponent.bbj::StateBusinessComponent
+
+declare StateForm        EditForm!
+declare StateBusinessComponent bc!
+
+bc! = new StateBusinessComponent()
+
+EditForm! = new StateForm()
+EditForm!.setBC(bc!)
+EditForm!.doModal()
+
+release
+
