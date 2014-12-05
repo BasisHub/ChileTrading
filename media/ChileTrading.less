@@ -1,0 +1,87 @@
+
+
+@baseURL: "/files/Demos/ChileTrading/";
+
+/* =========================================================== */
+/* External font definition to match the font used in the charts */
+/* =========================================================== */
+@font-face { font-family: Montserrat; src: url('@{baseURL}Montserrat-Regular.ttf') format("truetype"), url('@{baseURL}Montserrat-Regular.woff') format("woff"); font-weight:300; font-style:normal} 
+
+
+/* ============================================ */
+/* Extra functions */
+/* ============================================ */
+.box-shadow(@shadows) {
+    -webkit-box-shadow: @shadows;
+    -moz-box-shadow: @shadows;
+    box-shadow: @shadows;
+}
+.roundedBorder (@radius: 2px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+.animate (@animateParams) {
+	-webkit-transition: @animateParams;
+	-moz-transition: @animateParams;
+	-ms-transition: @animateParams;
+	-o-transition: @animateParams;
+	transition: @animateParams;
+}
+.border (@borderWidth, @borderColor) {
+	border-top: @borderWidth @borderColor;
+	border-bottom: @borderWidth @borderColor;
+	border-left: @borderWidth @borderColor;
+	border-right: @borderWidth @borderColor;
+}
+.borderVertical (@borderWidth, @borderColor) {
+	border-top: @borderWidth @borderColor;
+	border-bottom: @borderWidth @borderColor;
+}
+.borderHorizontal (@borderWidth, @borderColor) {
+	border-left: @borderWidth @borderColor;
+	border-right: @borderWidth @borderColor;
+} 
+
+#basisRoot {
+	background: #444;
+}
+
+/* ============================================ */
+/* MDI Top section */
+/* ============================================ */
+.BBjWindow.titlebanner {
+    background: url('@{baseURL}Concordia-front-banner1.png') no-repeat !important;
+    background-position: center center !important;
+    background-size: 100% auto !important;
+    
+    &.BBjTopLevelWindow {
+    	.border(0px, transparent);
+    }
+}
+
+/* ============================================ */
+/* Menu Buttons */
+/* ============================================ */
+.BBjButton.menu.levelbutton {
+	background: rgba(255,255,255,0.75) !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	.roundedBorder(0);
+	.box-shadow(none);
+	.animate(~"all 0.1s ease-in-out");
+	.borderVertical (5px, transparent) !important;
+	.borderHorizontal (0px, transparent) !important;
+	
+    &:hover {
+        border-bottom-color: #000 !important;
+    }
+    
+    &:active {
+    	.box-shadow(none);
+    	.borderVertical (5px, transparent) !important;
+    	border-bottom-color: #000;
+    }
+}
