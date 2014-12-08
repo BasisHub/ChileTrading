@@ -1,10 +1,9 @@
-
-
+@import (less) "../components/css/style.css";
 @baseURL: "/files/Demos/ChileTrading/";
 
-/* =========================================================== */
+/* ===========================================================   */
 /* External font definition to match the font used in the charts */
-/* =========================================================== */
+/* ===========================================================   */
 @font-face { font-family: Montserrat; src: url('@{baseURL}Montserrat-Regular.ttf') format("truetype"), url('@{baseURL}Montserrat-Regular.woff') format("woff"); font-weight:300; font-style:normal} 
 
 
@@ -31,22 +30,30 @@
 	transition: @animateParams;
 }
 .border (@borderWidth, @borderColor) {
-	border-top: @borderWidth @borderColor;
-	border-bottom: @borderWidth @borderColor;
-	border-left: @borderWidth @borderColor;
-	border-right: @borderWidth @borderColor;
+	border-top: @borderWidth solid @borderColor;
+	border-bottom: @borderWidth solid @borderColor;
+	border-left: @borderWidth solid @borderColor;
+	border-right: @borderWidth solid @borderColor;
 }
 .borderVertical (@borderWidth, @borderColor) {
-	border-top: @borderWidth @borderColor;
-	border-bottom: @borderWidth @borderColor;
+	border-top: @borderWidth solid @borderColor;
+	border-bottom: @borderWidth solid @borderColor;
 }
 .borderHorizontal (@borderWidth, @borderColor) {
-	border-left: @borderWidth @borderColor;
-	border-right: @borderWidth @borderColor;
+	border-left: @borderWidth solid @borderColor;
+	border-right: @borderWidth solid @borderColor;
 } 
 
 #basisRoot {
 	background: #444;
+	//top: -25px !important;
+}
+
+/* ============================================ */
+/* All BBj Controls */
+/* ============================================ */
+.BBjControl {
+	font-family: Montserrat !important;
 }
 
 /* ============================================ */
@@ -61,27 +68,57 @@
     	.border(0px, transparent);
     }
 }
+.BBjMDIBorder-splitter {
+    	background-color: #818e1d; // Olive color
+    	background-color: #00526f; // Dark Blue from old site
+}
 
 /* ============================================ */
 /* Menu Buttons */
 /* ============================================ */
 .BBjButton.menu.levelbutton {
-	background: rgba(255,255,255,0.75) !important;
+	color: #272727;
 	font-size: 14px !important;
 	font-weight: bold !important;
 	.roundedBorder(0);
 	.box-shadow(none);
 	.animate(~"all 0.1s ease-in-out");
-	.borderVertical (5px, transparent) !important;
-	.borderHorizontal (0px, transparent) !important;
+	.borderVertical (5px, transparent);
+	.borderHorizontal (0, transparent);
 	
+	&&.ID1 {
+		background: rgba(255,255,255,0.75) url('@{baseURL}Menu.ID1.png') no-repeat center 10px !important;
+	}
+	&&.ID2 {
+		background: rgba(255,255,255,0.75) url('@{baseURL}Menu.ID2.png') no-repeat center 10px !important;
+	}
+	&&.ID3 {
+		background: rgba(255,255,255,0.75) url('@{baseURL}Menu.ID3.png') no-repeat center 10px !important;
+	}
+			
     &:hover {
-        border-bottom-color: #000 !important;
+        border-bottom-color: #444 !important;
+        text-shadow: none;
     }
     
     &:active {
     	.box-shadow(none);
-    	.borderVertical (5px, transparent) !important;
-    	border-bottom-color: #000;
+    	border-bottom-color: #000 !important;
+    	border-top-color: transparent !important;
+    	text-shadow: none;
+    	
+		&&.ID1 {
+			background: rgba(255,255,255,0.95) url('@{baseURL}Menu.ID1.png') no-repeat center 10px !important;
+		}
+		&&.ID2 {
+			background: rgba(255,255,255,0.95) url('@{baseURL}Menu.ID2.png') no-repeat center 10px !important;
+		}
+		&&.ID3 {
+			background: rgba(255,255,255,0.95) url('@{baseURL}Menu.ID3.png') no-repeat center 10px !important;
+		}
+    }
+    
+    & .basis-button-face {
+    	vertical-align: bottom !important;
     }
 }
