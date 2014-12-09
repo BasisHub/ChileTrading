@@ -15,12 +15,16 @@
 @colorLightOlive: 	hsl(060, 050%, 80%);
 @colorLogoOlive: 	hsl(068, 052%, 37%);
 @colorBackground:	hsl(000, 000%, 27%);
+@colorMDISplitter:	hsl(000, 000%, 27%);
+@colorBackgroundDisabled: hsl(000, 000%, 95%);
 
 @colorDarkBorders:	@colorDarkBlue;
 @colorLightBorders:	hsl(000, 000%, 65%);
 @colorActiveBorders:lighten(@colorDarkBorders, 10%);
 @colorEditText:		@colorDarkBlue;
+@colorHeaderText: 	@colorMediumBlue;
 @colorButtonText:	hsl(000, 000%, 95%);
+@colorMenuText:		hsl(000, 000%, 15%);
 
 /* ============================================ */
 /* Extra functions */
@@ -77,42 +81,96 @@
 	background: @colorBackground;
 	//top: -25px !important;  // uncomment this to shift the whole thing up, hiding the control menu
 }
+
+// Tab Manager
+.BBjWindowManager-tabs {
+	.gradient (@colorMediumOlive, @colorMediumBlue);
+}
+
+// BBjWindow Decorations
 .BBjTopLevelWindow-titleBar-button {
 	& img {display: none;}
 	&.bbj-close { background: url('@{baseURL}bbj-close.png') no-repeat !important; }
 	&.bbj-maximize { background: url('@{baseURL}bbj-maximize.png') no-repeat !important; }
 	&.bbj-minimize { background: url('@{baseURL}bbj-minimize.png') no-repeat !important; }		
     background-position: center center !important;
-    background-size: cover !important;	
+    background-size: cover !important;
     
     &.gwt-PushButton-up {
-    	opacity: .4;
-        filter: alpha(opacity=40);
+    	opacity: .80;
+        filter: alpha(opacity=80);
     }
     &.gwt-PushButton-up-hovering {
-    	opacity: .7;
-        filter: alpha(opacity=70);
+    	opacity: .90;
+        filter: alpha(opacity=90);
     }   
     &.gwt-PushButton-down-hovering, .gwt-PushButton-down {
     	opacity: 1.0;
         filter: alpha(opacity=100);
     }              
 }
+/* Retina version of the background image */
+@media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .BBjTopLevelWindow-titleBar-button {
+    	&.bbj-close { background: url("@{baseURL}bbj-close@2x.png") no-repeat !important; background-size: 18px 18px !important;}
+		&.bbj-maximize { background: url('@{baseURL}bbj-maximize@2x.png') no-repeat !important; background-size: 18px 18px !important;}
+		&.bbj-minimize { background: url('@{baseURL}bbj-minimize@2x.png') no-repeat !important; background-size: 18px 18px !important;}	    	
+    }
+}
+
+/* ============================================ */
+/* BBj Windows */
+/* ============================================ */
+/* Titlebars */
+.Caption.BBjTopLevelWindow-titleBar {
+	background: @colorDarkBlue !important;
+}
+.BBjTopLevelWindow-titleBar-label {
+	color: @colorButtonText;
+}
+
+/* Hide the background of the top bar bar items */
+.BBjWindowManager-tabBarContainer .Caption.BBjTopLevelWindow-titleBar {
+	background: transparent !important;
+}
+.BBjWindow.BBjTopLevelWindow-container {
+	background-color: @colorBackground;
+}
+.BBjWindowManager-tab {
+	background: transparent !important;
+	border: none !important;
+}
 
 
 /* ============================================ */
 /* All BBj Controls */
 /* ============================================ */
-.BBjControl {
+.BBjControl, td.infoTitle, td.infoSubTitle {
 	font-family: Montserrat !important;
 }
+
 
 /* ============================================ */
 /* Edit Controls */
 /* ============================================ */
-.BBjEditBox:not(.bbj-disabled) {
-	color: @colorEditText;
-	.border (1px, @colorLightBorders)
+.BBjEditBox, .BBjCEdit, .BBjInputE, .BBjInputN, .BBjInputD, .BBjListBox {
+	&:not(.bbj-disabled) {
+		color: @colorEditText;
+		.border (1px, @colorLightBorders);
+	}
+	&.bbj-disabled {
+		color: desaturate(@colorEditText, 100%);
+		.border (1px, darken(@colorLightBorders, 5%));
+		background-color: @colorBackgroundDisabled;
+	}
+}
+.BBjListButton-buttonText {
+	&:not(.bbj-disabled) {
+		color: @colorEditText;
+	}
+	&.bbj-disabled {
+		color: desaturate(@colorEditText, 100%);
+	}
 }
 
 /* ============================================ */
@@ -129,56 +187,39 @@
 .BBjTabCtrl .scrollRight,
 .BBjTabCtrl .scrollLeft,
 {
-    color: @colorButtonText;
-    .gradient (@colorMediumBlue, @colorDarkBlue);
-    .roundedBorder(3.1px);
-    .box-shadow(~"0 1px 2px 0 rgba(0, 0, 0, 0.15), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25)");
-
-    &:not(.bbj-disabled):focus {
-    	.gradient (lighten(@colorMediumBlue, 5%), lighten(@colorDarkBlue, 5%));
-        outline: none;
-        .box-shadow(~"0 0 2px rgba(0, 0, 0, 0.25), 0 0 4px 1px hsla(210, 95%, 65%, .4)");
-        border-color: @colorActiveBorders;
-    }
-    
-    &:not(.bbj-disabled):hover {
-    	.gradient (lighten(@colorMediumBlue, 5%), lighten(@colorDarkBlue, 5%));
-	    color: lighten(@colorButtonText, 5%);
-	    border-color: @colorDarkBorders;
-	    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-    }
-    
-    
-    &:not(.bbj-disabled):active {
-    	.gradient (lighten(@colorMediumBlue, 10%), lighten(@colorDarkBlue, 10%));
-	    .box-shadow(~"0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 1px 3px 0 rgba(0, 0, 0, 0.35)") !important;
-	    color: lighten(@colorButtonText, 10%) !important;
-	    border-color: @colorDarkBorders;
-	    border-style: solid;
-	    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+	&:not(.bbj-transparent) {
+		&:not(.menu) {
+		    color: @colorButtonText;
+		    .gradient (@colorMediumBlue, @colorDarkBlue);
+		    .roundedBorder(3.1px);
+		    .box-shadow(~"0 1px 2px 0 rgba(0, 0, 0, 0.15), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25)");
+		
+			
+		    &:not(.bbj-disabled):focus {
+		    	.gradient (lighten(@colorMediumBlue, 5%), lighten(@colorDarkBlue, 5%));
+		        outline: none;
+		        .box-shadow(~"0 0 2px rgba(0, 0, 0, 0.25), 0 0 4px 1px hsla(210, 95%, 65%, .4)");
+		        border-color: @colorActiveBorders;
+		    }
+		    
+		    &:not(.bbj-disabled):hover {
+		    	.gradient (lighten(@colorMediumBlue, 5%), lighten(@colorDarkBlue, 5%));
+			    color: lighten(@colorButtonText, 5%);
+			    border-color: @colorDarkBorders;
+			    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+		    }
+		    
+		    
+		    &:not(.bbj-disabled):active {
+		    	.gradient (lighten(@colorMediumBlue, 10%), lighten(@colorDarkBlue, 10%));
+			    .box-shadow(~"0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 1px 3px 0 rgba(0, 0, 0, 0.35)") !important;
+			    color: lighten(@colorButtonText, 10%) !important;
+			    border-color: @colorDarkBorders;
+			    border-style: solid;
+			    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+			}
+		}
 	}
-}
-
-
-/* ============================================ */
-/* BBj Windows */
-/* ============================================ */
-.Caption.BBjTopLevelWindow-titleBar {
-	background-color: #548641 !important;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#a9a900), to(#006482)) !important;
-	background-image: -webkit-linear-gradient(top, #a9a900, #006482) !important;
-	background-image: -moz-linear-gradient(top, #a9a900, #006482) !important;
-	background-image: -o-linear-gradient(top, #a9a900, #006482) !important;
-	background-image: -ms-linear-gradient(top, #a9a900, #006482) !important;
-	background-image: linear-gradient(top, #a9a900, #006482) !important;
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#a9a900', EndColorStr='#006482') !important;
-}
-.BBjWindow.BBjTopLevelWindow-container {
-	background-color: @colorBackground;
-}
-.BBjWindowManager-tab {
-	background: transparent !important;
-	border: none !important;
 }
 
 
@@ -208,15 +249,15 @@
     }
 }
 .BBjMDIBorder-splitter {
-    	background-color: #818e1d; 			// Olive color
-    	background-color: @colorDarkBlue; 	// Dark Blue from old site
+    	background-color: @colorMDISplitter;
 }
+
 
 /* ============================================ */
 /* Menu Buttons */
 /* ============================================ */
 .BBjButton.menu.levelbutton {
-	color: #272727;
+	color: @colorMenuText;
 	font-size: 14px !important;
 	font-weight: bold !important;
 	.roundedBorder(0);
@@ -245,6 +286,8 @@
     	border-bottom-color: #000 !important;
     	border-top-color: transparent !important;
     	text-shadow: none;
+    	color: #000 !important;
+    	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
     	
 		&&.ID1 {
 			background: rgba(255,255,255,0.95) url('@{baseURL}Menu.ID1.png') no-repeat center 10px !important;
@@ -260,4 +303,43 @@
     & .basis-button-face {
     	vertical-align: bottom !important;
     }
+}
+
+
+/* ============================================ */
+/* All Forms */
+/* ============================================ */
+/* Set the text color to the company color */
+.BBjStaticText.GroupTitle, td.infoTitle {
+	color: @colorHeaderText;
+	text-shadow: 0 1px 0 #fff;
+}
+
+/* Sets the font sizes for normal labels and headers */
+td.infoTitle, .BBjListButton-item, .BBjListButton-buttonText {
+	font-size: 15px !important;	
+}
+.BBjStaticText:not(.GroupTitle), td.infoSubTitle {
+	font-size: 13px !important;
+}
+
+
+/* ============================================ */
+/* Fleet Form */
+/* ============================================ */
+.FormWnd .BBjStaticText:not(.GroupTitle) {
+	font-size: 13px !important;
+}
+.SearchWnd {
+	border-right: 1px solid @colorLightBorders;
+}
+
+/* ============================================ */
+/* Message (Contact) Form */
+/* ============================================ */
+.BBjWindow.Form {
+	
+	& .BBjControl {
+		font-size: 13px !important;
+	}
 }
